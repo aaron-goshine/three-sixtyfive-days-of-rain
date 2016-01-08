@@ -1,0 +1,22 @@
+{
+  "name": "three-sixty-five-days-of-rain",
+  "version": "1.0.0",
+  "description": "three sixty five days of rain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaron-goshine/three-sixtyfive-days-of-rain.git"
+  },
+  "author": "Aaron Goshine",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaron-goshine/three-sixtyfive-days-of-rain/issues"
+  },
+  "homepage": "https://github.com/aaron-goshine/three-sixtyfive-days-of-rain#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
