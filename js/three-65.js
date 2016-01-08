@@ -150,3 +150,44 @@ quickStore.updateStore(playlistRecommendation);
  * -- Make some noise the line above is where we update the
  * localstorage with recommendation
  */
+
+$(document).ready(function () {
+  var $availableList = $('#available-list');
+  var numItems = quickStore.getMaxIndex();
+  for (var i = 0; i < numItems; i++) {
+    var videoIdAtIndex = quickStore.getItemByIndex(i);
+    var videoName = quickStore.getItemById(videoIdAtIndex);
+    var element = $('<a/>').attr('id', videoIdAtIndex).html(videoName);
+    $availableList.append(element);
+  }
+  $availableList.click(function (event) {
+    if ($(event.target).prop('tagName') === 'A') {
+      var videoId = $(event.target).attr('id');
+      player.loadVideoById(videoId);
+    }
+  });
+
+  $('#YTVID').keydown(function (event) {
+    console.log(event);
+    if ( event.which == 13 ) {
+      event.preventDefault();
+      var videoId = $(event.target).val();
+      /** Todo fix up lata
+      */
+      if (videoId.length === 11){
+        player.loadVideoById(videoId);
+      }
+    }
+  });
+});
+
+
+
+
+
+
+
+
+
+
+

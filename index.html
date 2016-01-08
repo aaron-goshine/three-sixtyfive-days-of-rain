@@ -19,52 +19,67 @@
   <body>
 
     <div class="fullscreen-bg">
-      <video loop="loop" muted="muted" autoplay="true" poster="/media/rain1.jpg" class="video">
+      <video loop="loop" autoplay="true" poster="/media/rain1.jpg" class="video">
         <source src="media/rain1.mp4" type="video/mp4" />
         </video>
-        <div class="video">
-        </div>
       </div>
-      <div class="center-container">
-        <div class="center-block">
-          <h1>
-            <span class="RAINYMOOD" >Three Hundred and Sixityfive Days of Rain</span>
-          </h1>
-          <p>
-            Rain makes everything better. Relax with the sound of rain.
-          </p>
 
-          <h2>
-            <span class="RAINYMOOD" id="video-name"></span>
-          </h2>
-          <div id="media-player">
+      <div class="container">
+        <section class="media-container">
+          <header>
+            <h1>
+              <span class="RAINYMOOD" >Three Hundred and Sixty Five Days of Rain</span>
+            </h1>
+            <p>Rain makes everything better. Relax with the sound of rain.</p>
+            <h2>
+              <span class="RAINYMOOD" id="video-name"></span>
+            </h2>
+          </header>
+          <section id="mood-player">
             <div id="player"></div>
+            <div id="audio-player">
+              <p>Rainy Mood control</p>
+              <audio  loop="loop" autoplay="true" controls="controls">
+                <source src="/media/storm-0.ogg" type="audio/ogg" />
+                  <source src="/media/storm-0.m4a" type="audio/m4a" />
+                  </audio>
+                </div>
+              </section>
+              <footer>
+                <p>
+                  <a href="#playlist">
+                    Add your Own mix from youtube or choose from 365 
+                  </a>
+                </p>
+                <p> 
+                  This site was inspired by rainymood.com.
+                  Rainymood.com is a great site I have been using for a while now and found to be very useful when I am coding.
+                  Development work on Rainymood seems to have been frozen, so I took the oportunity to refactor the code to my
+                  personal preferences and host it on github as a open source project.
+                </p>
+              </footer>
+            </section>
           </div>
-          <div id="audio-player">
-            <p>Rainy Mood control</p>
-            <audio  loop="loop" autoplay="true" controls="controls">
-              <source src="/media/storm-0.ogg" type="audio/ogg" />
-              <source src="/media/storm-0.m4a" type="audio/m4a" />
-            </audio>
+          <div id="playlist" class="modal">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <header class="modal-container"> 
+                  <a href="#/" class="closebtn">×</a>
+                  <h4>Choose one of our preselected youtube tracks</h4>
+                </header>
+                <div class="modal-container" id="available-list">
+                </div>
+                <footer class="modal-container">
+                  <p>
+                    <span>Enter a Youtube video ID: </span>
+                    <input type="text" id="YTVID" />
+                  </p>
+                </footer>
               </div>
-              <p>
-                <a href="#playlist">
-                  Add your Own mix from youtube or choose from 365 
-                </a>
-              </p>
-              <p> 
-                This site was inspired by rainymood.com.
-                Rainymood.com is a great site I have been using for a while now and found to be very useful when I am coding.
-                Development work on Rainymood seems to have been frozen, so I took the oportunity to refactor the code to my
-                personal preferences and host it on github as a open source project.
-              </p>
             </div>
           </div>
-          <div class="lower-container">
-            <div class="social"></div>
-            <div class="play-list"></div>
-          </div>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
           <script src="/js/playlist-recommendation.js"></script>
           <script src="/js/three-65.js"></script>
-          </body>
-        </html>
+        </body>
+      </html>
