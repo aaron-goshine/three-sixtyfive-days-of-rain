@@ -11,42 +11,24 @@ var player;
 var playListIndex = 0;
 
 var quickStore = {
+  data: [],
+  dataHash: {},
   updateStore: function (data) {
+    this.data = data;
     for (var i = 0; i < data.length; i++) {
       var currentItem = data[i];
-      if (!this.getItemById(currentItem.id)) {
-        this.setItem(currentItem.id, currentItem.name);
-      }
+      this.dataHash[i] = currentItem;
+      this.dataHash[currentItem.id] = currentItem;
     }
   },
   getItemById: function (id) {
-    return localStorage.getItem(id);
+    return this.dataHash[id];
   },
   getItemByIndex: function (index) {
-    return localStorage.getItem(index + '_YT365');
+    return this.dataHash[index];
   },
   getMaxIndex: function () {
-    return Number(localStorage.getItem('YT365_GTINDX'));
-  },
-  setMaxIndex: function (num) {
-    localStorage.setItem('YT365_GTINDX', num);
-  },
-  setItem: function (item, value) {
-    var currentIndex = this.getMaxIndex();
-    var currentIndexKey = '' + currentIndex + '_YT365';
-    if (typeof item === 'string' && typeof value === 'string') {
-      localStorage.setItem(item, value);
-      localStorage.setItem(item + '_YTINDX', currentIndexKey);
-      localStorage.setItem(currentIndexKey, item);
-      this.setMaxIndex(currentIndex + 1);
-    }
-  },
-  removeItem: function (item) {
-    var indexOfIem = localStorage.getItem(item + '_YTINDX');
-    localStorage.removeItem(item);
-    localStorage.removeItem(indexOfIem + 'YT36', item);
-    localStorage.removeItem(item + '_YTINDX');
-    this.setMaxIndex(this.getMaxIndex() - 1);
+    return this.data.length;
   }
 };
 
@@ -60,27 +42,20 @@ var calculateDayIndex = function () {
 };
 
 var getNextPlayId = function () {
-  var id;
-  if (playListIndex >= quickStore.getMaxIndex()) {
+  if (playListIndex < quickStore.getMaxIndex() && playListIndex >= 0) {
     playListIndex = 0;
-    quickStore.setMaxIndex(playListIndex);
-    id = quickStore.getItemByIndex(playListIndex);
-  } else {
-    playListIndex = playListIndex + 1;
-    id = quickStore.getItemByIndex(playListIndex);
   }
-  return id;
+  return quickStore.getItemByIndex(playListIndex).id;
 };
 
 var getTodaysPlayId = function () {
-  return quickStore.getItemByIndex(calculateDayIndex());
+  return quickStore.getItemByIndex(calculateDayIndex()).id;
 };
 
 var onEnded = function (event) {
-  if (THREE_SIXTY_FIVE_PLAY) {
-    var nextPlayId = getNextPlayId();
-    event.target.loadVideoById(nextPlayId);
-  }
+  var nextPlayId = getNextPlayId();
+  event.target.loadVideoById(nextPlayId);
+  playListIndex += 1;
 };
 
 var onPlaying = function (event) {
@@ -155,9 +130,8 @@ $(document).ready(function () {
   var $availableList = $('#available-list');
   var numItems = quickStore.getMaxIndex();
   for (var i = 0; i < numItems; i++) {
-    var videoIdAtIndex = quickStore.getItemByIndex(i);
-    var videoName = quickStore.getItemById(videoIdAtIndex);
-    var element = $('<a/>').attr('id', videoIdAtIndex).html(videoName);
+    var itemAtIndex = quickStore.getItemByIndex(i);
+    var element = $('<a/>').attr('id', itemAtIndex.id).html(itemAtIndex.name);
     $availableList.append(element);
   }
   $availableList.click(function (event) {
@@ -169,25 +143,14 @@ $(document).ready(function () {
 
   $('#YTVID').keydown(function (event) {
     console.log(event);
-    if ( event.which == 13 ) {
+    if (event.which === 13) {
       event.preventDefault();
       var videoId = $(event.target).val();
-      /** Todo fix up lata
-      */
-      if (videoId.length === 11){
+      // * 11 is the current length of
+      // Youtube videoID
+      if (videoId.length === 11) {
         player.loadVideoById(videoId);
       }
     }
   });
 });
-
-
-
-
-
-
-
-
-
-
-
