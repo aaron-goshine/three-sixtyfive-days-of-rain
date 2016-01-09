@@ -1,3 +1,4 @@
 .DS_Store
 yt/
 node_modules/
+npm-debug.log
