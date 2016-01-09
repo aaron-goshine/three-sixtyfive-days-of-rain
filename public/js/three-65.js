@@ -26,13 +26,13 @@ var quickStore = {
     return localStorage.getItem(index + '_YT365');
   },
   getMaxIndex: function () {
-    return Number(localStorage.getItem('YT365_GTINDX')) - 1;
+    return Number(localStorage.getItem('YT365_GTINDX'));
   },
   setMaxIndex: function (num) {
     localStorage.setItem('YT365_GTINDX', num);
   },
   setItem: function (item, value) {
-    var currentIndex = this.getMaxIndex() || 0;
+    var currentIndex = this.getMaxIndex();
     var currentIndexKey = '' + currentIndex + '_YT365';
     if (typeof item === 'string' && typeof value === 'string') {
       localStorage.setItem(item, value);
