@@ -1,4 +1,4 @@
-var playlistRecommendation = [ {'id': 'puu2Enbb4bs', 'name': 'Daft Punk' },
+var playlistRecommendation = [
   {'id': 'Ua2loiGHZ38', 'name': 'Bonobo (Black Sands)' },
   {'id': 't4QK8RxCAwo', 'name': 'Boston (More than a Feeling)' },
   {'id': 'BTFD5DZwK7g', 'name': 'Boston (Foreplay/Long Time)' },
@@ -65,4 +65,5 @@ var playlistRecommendation = [ {'id': 'puu2Enbb4bs', 'name': 'Daft Punk' },
   {'id': 'NdYWuo9OFAw', 'name': 'Goo Goo Dolls' },
   {'id': 'L98UOMbgqVs', 'name': 'Thomas Bergersen' },
   {'id': 'Lh3TokLzzmw', 'name': 'The rgersen' },
-  {'id': 'xr_D_1fyFFs', 'name': 'Direct'} ];
+  {'id': 'xr_D_1fyFFs', 'name': 'Direct'}
+];
