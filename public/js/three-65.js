@@ -42,7 +42,7 @@ var calculateDayIndex = function () {
 };
 
 var getNextPlayId = function () {
-  if (playListIndex < quickStore.getMaxIndex() && playListIndex >= 0) {
+  if (playListIndex >= quickStore.getMaxIndex() || playListIndex < 0) {
     playListIndex = 0;
   }
   return quickStore.getItemByIndex(playListIndex).id;
@@ -53,8 +53,8 @@ var getTodaysPlayId = function () {
 };
 
 var onEnded = function (event) {
-  var nextPlayId = getNextPlayId();
-  event.target.loadVideoById(nextPlayId);
+  console.log('on ended');
+  event.target.loadVideoById(getNextPlayId());
   playListIndex += 1;
 };
 
