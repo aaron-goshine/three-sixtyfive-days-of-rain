@@ -57,7 +57,7 @@ var getTodaysPlayId = function () {
 
 var onEnded = function (event) {
   console.log('on ended');
-  event.target.loadVideoById(getNextPlayId());
+  playById(getNextPlayId());
   playListIndex += 1;
 };
 
