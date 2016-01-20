@@ -85,6 +85,7 @@ var playlistRecommendation = [
   {'id': 'jCAMPvQlT4g', 'name': 'Ladysmith Black Mambazo' },
   {'id': 'k1tyVlKjJZI', 'name': 'The Painted Veil Soundtrack - Gnossienne No. 1' },
   {'id': 'k8pM2oBSbHA', 'name': 'Star Wars: The Old Republic' },
+  {'id': 'G_pyTBuN09k', 'name': 'The best of Star Wars' },
   {'id': 'kd4K_9WwbsI', 'name': 'Capleton - Some Day'},
   {'id': 'l5K5Vq8zrCk', 'name': 'The King\'s Speech'},
   {'id': 'lxZEIBpUvUw', 'name': 'AVATAR'},
