@@ -1,18 +1,57 @@
+/*
+ * @ignore @Hack
+ * this is just silent eslint from tell me
+ * these variables are undefined
+ */
+var YT = YT;
+var $ = $;
+var playlistRecommendation = playlistRecommendation;
+/* --- end hack -- */
+
+/**
+ * Create script tag to source youtube iframe player
+ */
 var tag = document.createElement('script');
 tag.src = 'https://www.youtube.com/iframe_api';
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
+/*
+ * @var {boolean} THREE_SIXTY_FIVE_PLAY - will determined whither to continuous
+ *  play all items in the list
+ */
 var THREE_SIXTY_FIVE_PLAY = true;
+
+/*
+ * @var {boolean} PLAY_TODAY - whither to just repeat today's track automatically
+ */
 var PLAY_TODAY = true;
+
+/**
+ * @var {string} DEFAULT_PLAY_ID - default id if everything goes wrong the player will resort
+ */
 var DEFAULT_PLAY_ID = 'kbrhuUFjCII';
 
+/**
+ * @var {object} player - reference to the current instant of the Youtube iframe player
+ */
 var player;
-var playListIndex = 0;
 
+/**
+ * @var {number} playlistIndex - The current index of the 365 play list
+ */
+var playlistIndex = 0;
+
+/**
+ * @var quickStore - is an interface to the current playlist
+ */
 var quickStore = {
   data: [],
   dataHash: {},
+  /**
+   * @method  updateStore
+   * @param {array} data - Array containing objects @like `{id : ...., name: ......}`
+   */
   updateStore: function (data) {
     this.data = data;
     for (var i = 0; i < data.length; i++) {
@@ -36,6 +75,11 @@ var quickStore = {
   }
 };
 
+/**
+ * @function calculateDayIndex - calculate the number of the current day of the current year
+ * as a zero index value
+ * @return {number}
+ */
 var calculateDayIndex = function () {
   var currentDate = new Date();
   var startOfYear = new Date(currentDate.getFullYear(), 0, 1);
@@ -44,51 +88,88 @@ var calculateDayIndex = function () {
   return dayOfYear > 0 ? dayOfYear - 1 : dayOfYear;
 };
 
+/**
+ * @function getNextPlayId - returns the next Id in the playlist
+ * @return {string} - Youtube media id
+ */
 var getNextPlayId = function () {
-  if (playListIndex >= quickStore.getMaxIndex() || playListIndex < 0) {
-    playListIndex = 0;
+  if (playlistIndex >= quickStore.getMaxIndex() || playlistIndex < 0) {
+    playlistIndex = 0;
   }
-  return quickStore.getItemByIndex(playListIndex).id;
+  return quickStore.getItemByIndex(playlistIndex).id;
 };
 
+/**
+ * @function getTodaysPlayId - returns an id base on today's index
+ * @return {string} - Youtube media id
+ */
 var getTodaysPlayId = function () {
   return quickStore.getItemByIndex(calculateDayIndex()).id;
 };
 
+/**
+ * @function onEnded - is an event handler the is fired when each track has ended
+ */
 var onEnded = function (event) {
   console.log('on ended');
   playById(getNextPlayId());
-  playListIndex += 1;
+  playlistIndex += 1;
 };
 
+/**
+ * @function onPlaying - is an event handler the is fired when each track has resumed
+ */
 var onPlaying = function (event) {
   console.log('on playing');
 };
+
+/**
+ * @function onPaused - is an event handler the is fired when each track is paused
+ */
 
 var onPaused = function (event) {
   console.log('on paused');
 };
 
+/**
+ * @function stopVideo - is a wrapper to the current player.stopVideo()
+ */
 var stopVideo = function () {
   player.stopVideo();
 };
 
+/**
+ * @function onPlayerReady - is an event handler that is fired when the
+ * player is fully loading and ready to play
+ */
 var onPlayerReady = function (event) {
   event.target.playVideo();
 };
 
+/**
+ * @function onError - is an event handler that is fired when there is an exception
+ */
 var onError = function (event) {
   playDefaultQueId(event);
 };
 
+/**
+ * @function playDefaultQueId
+ * @return {string} - Youtube media id
+ */
 var playDefaultQueId = function () {
   if (PLAY_TODAY) {
     var id = getTodaysPlayId();
-    playListIndex = quickStore.getIndexById(id);
+    playlistIndex = quickStore.getIndexById(id);
     return id;
   }
   return DEFAULT_PLAY_ID;
 };
+
+/**
+ * @function onPlayerStateChange - is an primary event delegate that is will trigger
+ * methods corresponding to specific event handles
+ */
 
 var onPlayerStateChange = function (event) {
   switch (event.data) {
@@ -104,6 +185,10 @@ var onPlayerStateChange = function (event) {
   }
 };
 
+/**
+ * @function onYouTubeIframeAPIReady is the initialization method to configure the initial
+ * state of the player
+ */
 var onYouTubeIframeAPIReady = function () {
   player = new YT.Player('player', {
     width: '360',
@@ -119,9 +204,15 @@ var onYouTubeIframeAPIReady = function () {
   });
 };
 
+/**
+ * @function playById  - this function plays and item via and id,
+ * update the current playlist index and update the display
+ * @param {string} playById - Youtube media id
+ *
+ */
 var playById = function (videoId) {
   player.loadVideoById(videoId);
-  playListIndex = quickStore.getIndexById(videoId);
+  playlistIndex = quickStore.getIndexById(videoId);
   $('.item-outline').removeClass('item-outline');
   $('#' + videoId).parent().addClass('item-outline');
 };
@@ -133,8 +224,8 @@ $(document).ready(function () {
   for (var i = 0; i < numItems; i++) {
     var itemAtIndex = quickStore.getItemByIndex(i);
     var element = $('<div class="list-item"/>')
-    .html(itemAtIndex.name)
-    .append($('<a id="' +  itemAtIndex.id + '">' + (i + 1) + '</a>'));
+    .append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'))
+    .append(itemAtIndex.name);
 
     if (todayIndex === i) {
       element.addClass('today');
@@ -149,6 +240,9 @@ $(document).ready(function () {
     }
   });
 
+  /**
+   * event handle for the choose a track modal view
+   */
   $('#YTVID').keydown(function (event) {
     if (event.which === 13) {
       event.preventDefault();
@@ -161,8 +255,7 @@ $(document).ready(function () {
   });
 });
 /**
- * --- @global @param playlistRecommendation is loaded in as javaScript file
+ * --- @global @param {object} playlistRecommendation is loaded in as javaScript file
  * containing an array for youtube ids
  */
-
 quickStore.updateStore(playlistRecommendation);
