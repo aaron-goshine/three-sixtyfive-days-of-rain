@@ -239,19 +239,29 @@ $(document).ready(function () {
       playById(videoId);
     }
   });
-
+  /**
+   * @function playInputId
+   * @desc - event handler
+   */
+  function playInputId () {
+    var videoId = $('#YTVID').val().trim();
+    // * 11 is the current length of Youtube videoID
+    if (videoId.length >= 11) {
+      playById(videoId);
+    }
+  }
   /**
    * event handle for the choose a track modal view
    */
   $('#YTVID').keydown(function (event) {
     if (event.which === 13) {
       event.preventDefault();
-      var videoId = $(event.target).val();
-      // * 11 is the current length of Youtube videoID
-      if (videoId.length === 11) {
-        playById(videoId);
-      }
+      playInputId();
     }
+  });
+
+  $('#PLAY').click(function () {
+    playInputId();
   });
 });
 /**
