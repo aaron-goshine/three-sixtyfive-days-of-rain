@@ -115,5 +115,6 @@ var playlistRecommendation = [
   {'id': 'OV7G76SeUDI', 'name': 'ONLY FOR HACKER'},
   {'id': 'b57KntD8thg', 'name': 'Kill Bill: Vol. 1'},
   {'id': 'r-j413oAMf8', 'name': 'Desperado'},
-  {'id': 'Gkd-k59Z5qs', 'name': 'Pan'}
+  {'id': 'Gkd-k59Z5qs', 'name': 'Pan'},
+  {'id': '2DU4SXlpNvA', 'name': 'Sufi Flamenco - Ahmed Eltouny'
 ];
