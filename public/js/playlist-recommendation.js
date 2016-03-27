@@ -117,5 +117,6 @@ var playlistRecommendation = [
   {'id': 'r-j413oAMf8', 'name': 'Desperado'},
   {'id': 'Gkd-k59Z5qs', 'name': 'Pan'},
   {'id': '2DU4SXlpNvA', 'name': 'Sufi Flamenco - Ahmed Eltouny'},
-  {'id': 'nzjOJfrgABc', 'name': 'Jorge Drexler - Bailar En La Cueva'}
+  {'id': 'nzjOJfrgABc', 'name': 'Jorge Drexler - Bailar En La Cueva'},
+  {'id': 'kU9WgD3jZIc', 'name': 'Soundtracks of the Millennium'}
 ];
