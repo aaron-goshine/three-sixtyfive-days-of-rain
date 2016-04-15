@@ -118,5 +118,6 @@ var playlistRecommendation = [
   {'id': 'Gkd-k59Z5qs', 'name': 'Pan'},
   {'id': '2DU4SXlpNvA', 'name': 'Sufi Flamenco - Ahmed Eltouny'},
   {'id': 'nzjOJfrgABc', 'name': 'Jorge Drexler - Bailar En La Cueva'},
-  {'id': 'kU9WgD3jZIc', 'name': 'Soundtracks of the Millennium'}
+  {'id': 'kU9WgD3jZIc', 'name': 'Soundtracks of the Millennium'},
+  {'id': 'cfc9GD7gawM', 'name': 'Savant Redemtion'}
 ];
