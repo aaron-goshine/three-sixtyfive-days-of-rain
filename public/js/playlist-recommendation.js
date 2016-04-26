@@ -120,5 +120,10 @@ var playlistRecommendation = [
   {'id': 'nzjOJfrgABc', 'name': 'Jorge Drexler - Bailar En La Cueva'},
   {'id': 'kU9WgD3jZIc', 'name': 'Soundtracks of the Millennium'},
   {'id': 'cfc9GD7gawM', 'name': 'Savant Redemtion'},
-  {'id': 'cYVL3LkPBXA', 'name': 'Epic movie sound tracks'}
+  {'id': 'cYVL3LkPBXA', 'name': 'Epic movie sound tracks'},
+  {'id': 'jU9jt7duP5o', 'name': 'Powerful sound tracks'},
+  {'id': '6KowzeZ4tio', 'name': 'Incredible sound tracks'},
+  {'id': 'zBmFa6BA_Tk', 'name': 'Peaceful sound tracks'},
+  {'id': 'zsXIRzE927E', 'name': 'Deadpool'},
+  {'id': 'qZoK3acTce8', 'name': 'Whiplash'}
 ];
