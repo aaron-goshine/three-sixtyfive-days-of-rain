@@ -269,3 +269,6 @@ $(document).ready(function () {
  * containing an array for youtube ids
  */
 quickStore.updateStore(playlistRecommendation);
+//-- set default volume
+var rain = document.getElementById("rain-control");
+rain.volume = 0.2;
