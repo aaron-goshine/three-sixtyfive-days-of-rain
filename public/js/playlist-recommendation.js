@@ -119,5 +119,6 @@ var playlistRecommendation = [
   {'id': '2DU4SXlpNvA', 'name': 'Sufi Flamenco - Ahmed Eltouny'},
   {'id': 'nzjOJfrgABc', 'name': 'Jorge Drexler - Bailar En La Cueva'},
   {'id': 'kU9WgD3jZIc', 'name': 'Soundtracks of the Millennium'},
-  {'id': 'cfc9GD7gawM', 'name': 'Savant Redemtion'}
+  {'id': 'cfc9GD7gawM', 'name': 'Savant Redemtion'},
+  {'id': 'cYVL3LkPBXA', 'name': 'Epic movie sound tracks'}
 ];
