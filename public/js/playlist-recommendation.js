@@ -126,6 +126,8 @@ var playlistRecommendation = [
   {'id': 'zBmFa6BA_Tk', 'name': 'Peaceful sound tracks'},
   {'id': 'zsXIRzE927E', 'name': 'Deadpool'},
   {'id': 'qZoK3acTce8', 'name': 'Whiplash'},
-  {'id': '3uQAzmIQIIc', 'name': 'Japaness Flute'}
-  
+  {'id': '3uQAzmIQIIc', 'name': 'Japaness Flute'},
+  {'id': 'C7HL5wYqAbU', 'name': 'Japaness Drums'},
+  {'id': '9a_V-FKyfuc', 'name': 'Chiness Drums'},
+  {'id': 'uEobRFSWyoM', 'name': 'Chiness Drums'}
 ];
