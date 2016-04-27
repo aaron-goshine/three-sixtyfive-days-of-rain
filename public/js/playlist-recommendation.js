@@ -129,5 +129,5 @@ var playlistRecommendation = [
   {'id': '3uQAzmIQIIc', 'name': 'Japaness Flute'},
   {'id': 'C7HL5wYqAbU', 'name': 'Japaness Drums'},
   {'id': '9a_V-FKyfuc', 'name': 'Chiness Drums'},
-  {'id': 'uEobRFSWyoM', 'name': 'Chiness Drums'}
+  {'id': 'uEobRFSWyoM', 'name': 'Jamaican Drums'}
 ];
