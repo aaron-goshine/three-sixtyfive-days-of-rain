@@ -125,5 +125,7 @@ var playlistRecommendation = [
   {'id': '6KowzeZ4tio', 'name': 'Incredible sound tracks'},
   {'id': 'zBmFa6BA_Tk', 'name': 'Peaceful sound tracks'},
   {'id': 'zsXIRzE927E', 'name': 'Deadpool'},
-  {'id': 'qZoK3acTce8', 'name': 'Whiplash'}
+  {'id': 'qZoK3acTce8', 'name': 'Whiplash'},
+  {'id': '3uQAzmIQIIc', 'name': 'Japaness Flute'}
+  
 ];
