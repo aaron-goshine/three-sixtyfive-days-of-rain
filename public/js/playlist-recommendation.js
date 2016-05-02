@@ -129,5 +129,8 @@ var playlistRecommendation = [
   {'id': '3uQAzmIQIIc', 'name': 'Japaness Flute'},
   {'id': 'C7HL5wYqAbU', 'name': 'Japaness Drums'},
   {'id': '9a_V-FKyfuc', 'name': 'Chiness Drums'},
-  {'id': 'uEobRFSWyoM', 'name': 'Jamaican Drums'}
+  {'id': 'uEobRFSWyoM', 'name': 'Jamaican Drums'},
+  {'id': 'Pcb2JxWZy0E', 'name': 'Best of Enya'},
+  {'id': '0m_FR2i8AM0', 'name': 'Best of Diana Ross'},
+  {'id': 'fq1oIXKFOtU', 'name': 'Best of Phil Collins'}
 ];
