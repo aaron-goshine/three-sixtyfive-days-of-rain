@@ -132,5 +132,11 @@ var playlistRecommendation = [
   {'id': 'uEobRFSWyoM', 'name': 'Jamaican Drums'},
   {'id': 'Pcb2JxWZy0E', 'name': 'Best of Enya'},
   {'id': '0m_FR2i8AM0', 'name': 'Best of Diana Ross'},
-  {'id': 'fq1oIXKFOtU', 'name': 'Best of Phil Collins'}
+  {'id': 'fq1oIXKFOtU', 'name': 'Best of Phil Collins'},
+  {'id': 'IzTv5hMfMPs', 'name': 'Looper'},
+  {'id': 'LSeBkxC8Cv0', 'name': 'Bad boyz'},
+  {'id': '-h2F6XoZkXI', 'name': 'Terminator'},
+  {'id': 'eEmkFex6p_I', 'name': 'Avengers'},
+  {'id': '9XwNTiFnpXI', 'name': 'Hulk 2003'},
+  {'id': 'qfJ02Y689G8', 'name': 'Hackers themes Song'}
 ];
