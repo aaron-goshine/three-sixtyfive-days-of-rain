@@ -159,6 +159,31 @@ var playlistRecommendation = [
   {'id': 'LAIAFkLVL-0', 'name': 'Dancer In The Dark'},
   {'id': 'f7c226qewCU', 'name': 'Nick And Norah\'s Infinite'},
   {'id': 'aZUm2Gp3_AA', 'name': 'Blue Valentine'},
-  {'id': 'aZUm2Gp3_AA', 'name': 'Blue Valentine'},
-  NiwoFK8nwZ0
+  {'id': 'NiwoFK8nwZ0', 'name': 'Shaft'},
+  {'id': 'ZgTcfgM1lwA', 'name': 'Greenberg'},
+  {'id': 'Ri2eyeh2ZEI', 'name': 'There will be blood'},
+  {'id': 'qUC_rxp8Yp4', 'name': 'Where The Wild Things Are'},
+  {'id': 'Cvd6mDJQjaA', 'name': 'Marie Antoinette'},
+  {'id': 'E-G-He20224', 'name': 'Mean Steets'},
+  {'id': '4pqxRCUp4r0', 'name': 'Moon'},
+  {'id': 'Y4cLmXml8O0', 'name': 'Pulp Fiction'},
+  {'id': 'v3tvfNUACFE', 'name': 'Eternal Sunshine'},
+  {'id': '__t7xZvw0vs', 'name': 'The Royal Tenenbaums'},
+  {'id': '_Qt8r3Kl398', 'name': 'Rushmore'},
+  {'id': 'DgNzYldKBTo', 'name': 'The Straight Story'},
+  {'id': 'TzwJI0WYLVk', 'name': 'Romeo + Juliet'},
+  {'id': 'Mx718Kdy83U', 'name': 'Stand By Me'},
+  {'id': 'r2ofNusfqSY', 'name': 'Lost Highway'},
+  {'id': 'aZUm2Gp3_AA', 'name': 'Judgement Night'},
+  {'id': '8jZQZb8gCiI', 'name': 'Goodfellas'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  {'id': '4HwW-BjipwY', 'name': 'Empire Records'},
+  yydZbVoCbn0
+  
+ 
 ];
