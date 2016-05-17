@@ -191,11 +191,8 @@ var playlistRecommendation = [
   {'id': 'a6qUTSZ5Zmk', 'name': 'Blade Runner'},
   {'id': '4HwW-BjipwY', 'name': 'The Life Aquatic'},
   {'id': 'azcJHUTRGsg', 'name': 'Thunder cast'},
-  {'id': '4HwW-BjipwY', 'name': 'Empire Records'}, 
-  {'id': '4HwW-BjipwY', 'name': 'Empire Records'}, 
-  {'id': '4HwW-BjipwY', 'name': 'Empire Records'}, 
-  {'id': '4HwW-BjipwY', 'name': 'Empire Records'}, 
- 
-  
- 
+  {'id': 'VpuNGSFccNo', 'name': 'Garden State'}, 
+  {'id': 'c_OkcVLBB9A', 'name': 'Tom Waits'}, 
+  {'id': 'UtaCI_O99z4', 'name': 'Dirty Dancing'}, 
+  {'id': 't3pA567j8Kk', 'name': 'Dirty Dancing Havana nights'}
 ];
