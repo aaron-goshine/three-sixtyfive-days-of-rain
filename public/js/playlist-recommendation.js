@@ -158,5 +158,7 @@ var playlistRecommendation = [
   {'id': 'kdykT6IE9Fw', 'name': 'Dirty Harry'},
   {'id': 'LAIAFkLVL-0', 'name': 'Dancer In The Dark'},
   {'id': 'f7c226qewCU', 'name': 'Nick And Norah\'s Infinite'},
-  {'id': 'aZUm2Gp3_AA', 'name': 'Blue Valentine'}
+  {'id': 'aZUm2Gp3_AA', 'name': 'Blue Valentine'},
+  {'id': 'aZUm2Gp3_AA', 'name': 'Blue Valentine'},
+  NiwoFK8nwZ0
 ];
