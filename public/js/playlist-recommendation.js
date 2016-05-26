@@ -215,5 +215,6 @@ var playlistRecommendation = [
   {'id': 'rbsVhn2x7Ew', 'name': 'Fantan Mojah'},
   {'id': 'LfeIfiiBTfY', 'name': 'Chronixx'},
   {'id': 'KFx_PSy_Y3g', 'name': 'No Cigarette Smoking'},
-  {'id': 'KHVQVVNmh1U', 'name': 'Love and affection'}
+  {'id': 'KHVQVVNmh1U', 'name': 'Love and affection'},
+  {'id': 'sB6HY8r983c', 'name': 'Seven Nation Army - Vintage New Orleans'}
 ];
