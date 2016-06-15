@@ -216,5 +216,6 @@ var playlistRecommendation = [
   {'id': 'LfeIfiiBTfY', 'name': 'Chronixx'},
   {'id': 'KFx_PSy_Y3g', 'name': 'No Cigarette Smoking'},
   {'id': 'KHVQVVNmh1U', 'name': 'Love and affection'},
-  {'id': 'sB6HY8r983c', 'name': 'Seven Nation Army - Vintage New Orleans'}
+  {'id': 'sB6HY8r983c', 'name': 'Seven Nation Army - Vintage New Orleans'},
+  {'id': 'YwbyU_QuBNs', 'name': 'The Legend of Zelda 25th Anniversary Orchestra'}
 ];
