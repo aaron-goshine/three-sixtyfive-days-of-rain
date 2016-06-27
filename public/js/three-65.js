@@ -1,20 +1,4 @@
-/*
- * @ignore @Hack
- * this is just silent eslint from tell me
- * these variables are undefined
- */
-var YT = YT;
-var $ = $;
-var playlistRecommendation = playlistRecommendation;
-/* --- end hack -- */
-
-/**
- * Create script tag to source youtube iframe player
- */
-var tag = document.createElement('script');
-tag.src = 'https://www.youtube.com/iframe_api';
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+/* eslint YT $ playlistRecommendation */
 
 /*
  * @var {boolean} THREE_SIXTY_FIVE_PLAY - will determined whither to continuous
@@ -218,28 +202,7 @@ var playById = function (videoId) {
 };
 
 $(document).ready(function () {
-  var $availableList = $('#available-list');
-  var numItems = quickStore.getMaxIndex();
-  var todayIndex = calculateDayIndex();
-  for (var i = 0; i < numItems; i++) {
-    var itemAtIndex = quickStore.getItemByIndex(i);
-    var element = $('<div class="list-item"/>')
-    .append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'))
-    .append(itemAtIndex.name);
-
-    if (todayIndex === i) {
-      element.addClass('today');
-    }
-
-    $availableList.append(element);
-  }
-  $availableList.click(function (event) {
-    if ($(event.target).prop('tagName') === 'A') {
-      var videoId = $(event.target).attr('id');
-      playById(videoId);
-    }
-  });
-  /**
+    /**
    * @function playInputId
    * @desc - event handler
    */
@@ -264,11 +227,42 @@ $(document).ready(function () {
     playInputId();
   });
 });
-/**
- * --- @global @param {object} playlistRecommendation is loaded in as javaScript file
- * containing an array for youtube ids
- */
-quickStore.updateStore(playlistRecommendation);
+
+$.get('/js/playlist.json', function (playlist) {
+  debugger;
+  quickStore.updateStore(playlist);
+  var $availableList = $('#available-list');
+  var numItems = quickStore.getMaxIndex();
+  var todayIndex = calculateDayIndex();
+  for (var i = 0; i < numItems; i++) {
+    var itemAtIndex = quickStore.getItemByIndex(i);
+    var element = $('<div class="list-item"/>')
+      .append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'))
+      .append(itemAtIndex.name);
+
+    if (todayIndex === i) {
+      element.addClass('today');
+    }
+
+    $availableList.append(element);
+  }
+
+  $availableList.click(function (event) {
+    if ($(event.target).prop('tagName') === 'A') {
+      var videoId = $(event.target).attr('id');
+      playById(videoId);
+    }
+  });
+
+  /**
+  * Create script tag to source youtube iframe player
+  */
+  var tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+})
 //-- set default volume
 var rain = document.getElementById("rain-control");
 rain.volume = 0.2;
