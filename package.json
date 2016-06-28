@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error no test specified\" && exit 1",
-    "start": "node index.js",
+    "start": "node setup.js && node index.js",
     "startnm": "nodemon -e js -w ./ ./index.js",
     "setup": "node ./setup.js"
   },

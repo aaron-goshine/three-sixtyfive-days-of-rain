@@ -253,9 +253,10 @@ function renderPlaylist (playlist) {
   var todayIndex = calculateDayIndex();
   for (var i = 0; i < numItems; i++) {
     var itemAtIndex = quickStore.getItemByIndex(i);
-    var element = $('<div class="list-item"/>')
-      .append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'))
-      .append(itemAtIndex.title);
+    var element = $('<div class="list-item"/>');
+    element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
+    element.append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'));
+    element.append(itemAtIndex.title);
 
     if (todayIndex === i) {
       element.addClass('today');
