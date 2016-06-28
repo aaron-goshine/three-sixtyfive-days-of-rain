@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error no test specified\" && exit 1",
     "start": "node index.js",
-    "startnm": "nodemon -e js -w ./ ./index.js"
+    "startnm": "nodemon -e js -w ./ ./index.js",
+    "setup": "node ./setup.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,6 @@
     "nodemon": "^1.9.0"
   },
   "engines": {
-    "node": "0.12.7"
+    "node": "^5.11.1"
   }
 }
