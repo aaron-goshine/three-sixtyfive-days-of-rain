@@ -80,7 +80,10 @@ var getNextPlayId = function () {
   if (playlistIndex >= quickStore.getMaxIndex() || playlistIndex < 0) {
     playlistIndex = 0;
   }
-  return quickStore.getItemByIndex(playlistIndex).id;
+ var item = quickStore.getItemByIndex(calculateDayIndex());
+  if (item) {
+    return item.id
+  }
 };
 
 /**
@@ -88,7 +91,10 @@ var getNextPlayId = function () {
  * @return {string} - Youtube media id
  */
 var getTodaysPlayId = function () {
-  return quickStore.getItemByIndex(calculateDayIndex()).id;
+  var item = quickStore.getItemByIndex(calculateDayIndex());
+  if (item) {
+    return item.id
+  }
 };
 
 /**
@@ -143,7 +149,7 @@ var onError = function (event) {
  */
 var playDefaultQueId = function () {
   if (PLAY_TODAY) {
-    var id = getTodaysPlayId();
+    var id = getTodaysPlayId() || 'Ua2loiGHZ38';
     playlistIndex = quickStore.getIndexById(id);
     return id;
   }
@@ -207,15 +213,26 @@ $(document).ready(function () {
    * @desc - event handler
    */
   function playInputId () {
-    var videoId = $('#YTVID').val().trim();
+    var videoIdOrUrl = $('#YTVID').val().trim();
     // * 11 is the current length of Youtube videoID
-    if (videoId.length >= 11) {
-      playById(videoId);
+    if (videoIdOrUrl.length === 11) {
+      playById(videoIdOrUrl);
     }
+
+    $.ajax({
+      type: 'POST',
+      url: '/api/add',
+      data: JSON.stringify({"mediaurl": videoIdOrUrl}),
+      success: function (playlist) {
+        renderPlaylist (playlist);
+      },
+      contentType: "application/json",
+      dataType: 'json'
+    });
   }
-  /**
-   * event handle for the choose a track modal view
-   */
+    /**
+  * event handle for the choose a track modal view
+  */
   $('#YTVID').keydown(function (event) {
     if (event.which === 13) {
       event.preventDefault();
@@ -228,17 +245,17 @@ $(document).ready(function () {
   });
 });
 
-$.get('/js/playlist.json', function (playlist) {
-  debugger;
+function renderPlaylist (playlist) {
   quickStore.updateStore(playlist);
   var $availableList = $('#available-list');
+  $availableList.empty();
   var numItems = quickStore.getMaxIndex();
   var todayIndex = calculateDayIndex();
   for (var i = 0; i < numItems; i++) {
     var itemAtIndex = quickStore.getItemByIndex(i);
     var element = $('<div class="list-item"/>')
       .append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'))
-      .append(itemAtIndex.name);
+      .append(itemAtIndex.title);
 
     if (todayIndex === i) {
       element.addClass('today');
@@ -252,11 +269,15 @@ $.get('/js/playlist.json', function (playlist) {
       var videoId = $(event.target).attr('id');
       playById(videoId);
     }
-  });
+  })
+}
 
+$.get('/api/playlist', function (playlist) {
+  renderPlaylist (playlist);
   /**
   * Create script tag to source youtube iframe player
   */
+
   var tag = document.createElement('script');
   tag.src = 'https://www.youtube.com/iframe_api';
   var firstScriptTag = document.getElementsByTagName('script')[0];

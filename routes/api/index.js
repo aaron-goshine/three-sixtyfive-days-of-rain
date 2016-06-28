@@ -30,31 +30,37 @@ module.exports = () => {
   });
 
   router.post('/add', (req, res, next) => {
-    let media = req.body.mediaurl;
+    var media = req.body.mediaurl;
     var youtubeId = youtubeIdExtrator(media);
     if (youtubeId) {
-      // 'HcwTxRuq-uk'
       youTube.getById(youtubeId, (error, result) => {
         if (error) {
-          res.send("invalid youTube url");
+          res.send('error while talking to youtube');
         } else {
-          res.setHeader('Content-Type', 'application/json');
-          res.send(JSON.stringify(result, null, 2));
           jsonfile.readFile(file, (err, jsonFile) => {
-            var updatedPlaylist = JSON.parse(jsonFile);
-            updatedPlaylist.push({
-              'id': 'dfdfdf',
-              'title': 'this is the t',
-              'thumbnail': 'http://'
+            var updatedPlaylist = jsonFile;
+            var item  = result.items.pop();
+
+            var entries = updatedPlaylist.filter((storeItem) => {
+              return storeItem.id === youtubeId;
             });
-            jsonfile.readFile(file, updatedPlaylist, (err, jsonFile) => {
+
+            if (entries.length < 1) {
+              updatedPlaylist.push({
+                'id': youtubeId,
+                'title': item.snippet.title,
+                'thumbnail': item.snippet.thumbnails.default
+              });
+            }
+
+            jsonfile.writeFile(file, updatedPlaylist, (err, jsonFile) => {
+              res.setHeader('Content-Type', 'application/json');
               res.send(JSON.stringify(updatedPlaylist));
             });
           })
         }
       });
     }
-    res.send("invalid youTube url");
   });
 
   router.put('/:id', (req, res, next) => {

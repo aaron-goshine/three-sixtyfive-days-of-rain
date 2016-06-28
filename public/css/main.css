@@ -232,3 +232,8 @@ header *, footer * {
 .modal input {
     color: #000;
 }
+
+#YTVID {
+    min-width: 240px;
+    font-family: arial;
+}
