@@ -1,12 +1,6 @@
 /* eslint YT $ playlistRecommendation */
 
 /*
- * @var {boolean} THREE_SIXTY_FIVE_PLAY - will determined whither to continuous
- *  play all items in the list
- */
-var THREE_SIXTY_FIVE_PLAY = true;
-
-/*
  * @var {boolean} PLAY_TODAY - whither to just repeat today's track automatically
  */
 var PLAY_TODAY = true;
@@ -14,7 +8,7 @@ var PLAY_TODAY = true;
 /**
  * @var {string} DEFAULT_PLAY_ID - default id if everything goes wrong the player will resort
  */
-var DEFAULT_PLAY_ID = 'kbrhuUFjCII';
+var DEFAULT_PLAY_ID = 'Ua2loiGHZ38';
 
 /**
  * @var {object} player - reference to the current instant of the Youtube iframe player
@@ -147,13 +141,13 @@ var onError = function (event) {
  * @function playDefaultQueId
  * @return {string} - Youtube media id
  */
-var playDefaultQueId = function () {
-  if (PLAY_TODAY) {
-    var id = getTodaysPlayId() || 'Ua2loiGHZ38';
-    playlistIndex = quickStore.getIndexById(id);
-    return id;
+var playDefaultQueId = function (erro) {
+  if (erro) {
+    playById(DEFAULT_PLAY_ID);
   }
-  return DEFAULT_PLAY_ID;
+  var id = getTodaysPlayId();
+  playlistIndex = quickStore.getIndexById(id);
+  return id;
 };
 
 /**
