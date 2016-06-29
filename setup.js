@@ -42,4 +42,3 @@ function fetchAndStore (youtubeId , callback) {
     });
   }
 }
-

@@ -205,6 +205,8 @@ h2{
     font-weight: bold;
     color: #fff;
     clear: both;
+    display: inline-block;
+    max-width: 2em;
 }
 
 .closebtn:hover,
