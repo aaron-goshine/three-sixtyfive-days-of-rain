@@ -40,11 +40,9 @@ module.exports = () => {
           jsonfile.readFile(file, (err, jsonFile) => {
             var updatedPlaylist = jsonFile;
             var item  = result.items.pop();
-
             var entries = updatedPlaylist.filter((storeItem) => {
               return storeItem.id === youtubeId;
             });
-
             if (entries.length < 1) {
               updatedPlaylist.push({
                 'id': youtubeId,
@@ -52,7 +50,6 @@ module.exports = () => {
                 'thumbnail': item.snippet.thumbnails.default
               });
             }
-
             jsonfile.writeFile(file, updatedPlaylist, (err, jsonFile) => {
               res.setHeader('Content-Type', 'application/json');
               res.send(JSON.stringify(updatedPlaylist));
@@ -68,8 +65,21 @@ module.exports = () => {
     res.render('pages/api', {response: 'Hello World'});
   });
 
-  router.delete('/api/id/:id', (req, res, next) => {
-    res.render('api', {response: 'Hello World'});
+  router.post('/delete', (req, res, next) => {
+    let youtubeId = req.body.id;
+    if (youtubeId) {
+      jsonfile.readFile(file, (err, jsonFile) => {
+        var entries = jsonFile.filter((storeItem) => {
+          return storeItem.id !== youtubeId;
+        });
+
+        jsonfile.writeFile(file, entries, (err, jsonFile) => {
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify(entries));
+        });
+      })
+    }
   });
+
   return router;
 };

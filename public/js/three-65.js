@@ -26,10 +26,10 @@ var playlistIndex = 0;
 var quickStore = {
   data: [],
   dataHash: {},
-  /**
-   * @method  updateStore
-   * @param {array} data - Array containing objects @like `{id : ...., name: ......}`
-   */
+    /**
+  * @method  updateStore
+  * @param {array} data - Array containing objects @like `{id : ...., name: ......}`
+  */
   updateStore: function (data) {
     this.data = data;
     for (var i = 0; i < data.length; i++) {
@@ -74,7 +74,7 @@ var getNextPlayId = function () {
   if (playlistIndex >= quickStore.getMaxIndex() || playlistIndex < 0) {
     playlistIndex = 0;
   }
- var item = quickStore.getItemByIndex(calculateDayIndex());
+  var item = quickStore.getItemByIndex(calculateDayIndex());
   if (item) {
     return item.id
   }
@@ -159,13 +159,13 @@ var onPlayerStateChange = function (event) {
   switch (event.data) {
     case YT.PlayerState.ENDED:
       onEnded(event);
-      break;
-    case YT.PlayerState.PLAYING:
-      onPlaying(event);
-      break;
-    case YT.PlayerState.PAUSED:
-      onPaused(event);
-      break;
+    break;
+  case YT.PlayerState.PLAYING:
+    onPlaying(event);
+  break;
+case YT.PlayerState.PAUSED:
+  onPaused(event);
+break;
   }
 };
 
@@ -200,33 +200,55 @@ var playById = function (videoId) {
   $('.item-outline').removeClass('item-outline');
   $('#' + videoId).parent().addClass('item-outline');
 };
+  /**
+* @function playInputId
+* @desc - event handler
+*/
+function playInputId () {
+  var videoIdOrUrl = $('#YTVID').val().trim();
+  // * 11 is the current length of Youtube videoID
+  if (videoIdOrUrl.length === 11) {
+    playById(videoIdOrUrl);
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: '/api/add',
+    data: JSON.stringify({"mediaurl": videoIdOrUrl}),
+    success: function (playlist) {
+      renderPlaylist (playlist);
+    },
+    contentType: "application/json",
+    dataType: 'json'
+  });
+}
+
+  /**
+* delete by id
+*
+* @name deleteById
+* @function
+* @param {object} event
+*/
+function deleteById (id) {
+  $.ajax({
+    type: 'POST',
+    url: '/api/delete',
+    data: JSON.stringify({"id": id}),
+    success: function (playlist) {
+      renderPlaylist(playlist);
+    },
+    contentType: "application/json",
+    dataType: 'json'
+  });
+}
+
 
 $(document).ready(function () {
-    /**
-   * @function playInputId
-   * @desc - event handler
-   */
-  function playInputId () {
-    var videoIdOrUrl = $('#YTVID').val().trim();
-    // * 11 is the current length of Youtube videoID
-    if (videoIdOrUrl.length === 11) {
-      playById(videoIdOrUrl);
-    }
 
-    $.ajax({
-      type: 'POST',
-      url: '/api/add',
-      data: JSON.stringify({"mediaurl": videoIdOrUrl}),
-      success: function (playlist) {
-        renderPlaylist (playlist);
-      },
-      contentType: "application/json",
-      dataType: 'json'
-    });
-  }
-    /**
-  * event handle for the choose a track modal view
-  */
+  /**
+* event handle for the choose a track modal view
+*/
   $('#YTVID').keydown(function (event) {
     if (event.which === 13) {
       event.preventDefault();
@@ -237,6 +259,7 @@ $(document).ready(function () {
   $('#PLAY').click(function () {
     playInputId();
   });
+
 });
 
 function renderPlaylist (playlist) {
@@ -250,7 +273,8 @@ function renderPlaylist (playlist) {
     var element = $('<div class="list-item"/>');
     element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
     element.append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'));
-    element.append(itemAtIndex.title);
+    element.append($('<p>' + itemAtIndex.title + '</a>'));
+    element.append($('<div class="delete closebtn" data-id="'+ itemAtIndex.id +'"> &#215;</a>'));
 
     if (todayIndex === i) {
       element.addClass('today');
@@ -264,12 +288,17 @@ function renderPlaylist (playlist) {
       var videoId = $(event.target).attr('id');
       playById(videoId);
     }
+
+    if ($(event.target).hasClass('delete')) {
+      var videoId = $(event.target).data('id');
+      deleteById(videoId);
+    }
   })
 }
 
 $.get('/api/playlist', function (playlist) {
   renderPlaylist (playlist);
-  /**
+    /**
   * Create script tag to source youtube iframe player
   */
 
