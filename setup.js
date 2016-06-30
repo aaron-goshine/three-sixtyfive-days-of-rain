@@ -26,7 +26,7 @@ function fetchAndStore (youtubeId, index) {
     }
     var item = result.items.pop();
     // Get a Postgres client from the connection pool
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
       // Handle connection errors
       if(err) {
         done();
@@ -37,8 +37,11 @@ function fetchAndStore (youtubeId, index) {
         'title': item.snippet.title,
         'thumbnail': item.snippet.thumbnails.default
       }
-      client.query("INSERT INTO media_tracks (track_data, track_id) values($1, $2)", [jsonObject, jsonObject.id]);
-        console.log(jsonObject.id + ' ' + index);
+      var client = client.query("INSERT INTO media_tracks (track_data, track_id) values($1, $2)", [jsonObject, jsonObject.id]);
+      console.log(jsonObject.id + ' ' + index);
+      client.on('error', function (error) {
+        console.log(error);
+      });
       done()
     });
   });

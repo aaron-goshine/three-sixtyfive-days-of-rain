@@ -35,7 +35,7 @@ function fetchAndStore (youtubeId, callback) {
     var item = result.items.pop();
 
     // Get a Postgres client from the connection pool
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
       // Handle connection errors
       if(err) {
         done();
@@ -59,7 +59,7 @@ function fetchAndStore (youtubeId, callback) {
 }
 
 function getAll (req, res, next) {
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
     // Handle connection errors
     if(err) {
       done();
@@ -102,7 +102,7 @@ module.exports = () => {
 
   router.post('/delete', (req, res, next) => {
     let youtubeId = req.body.id;
-    pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
       // Handle connection errors
       if(err) {
         done();
