@@ -74,9 +74,11 @@ var getNextPlayId = function () {
   if (playlistIndex >= quickStore.getMaxIndex() || playlistIndex < 0) {
     playlistIndex = 0;
   }
-  var item = quickStore.getItemByIndex(calculateDayIndex());
+  var item = quickStore.getItemByIndex(playlistIndex);
   if (item) {
     return item.id
+  } else {
+    return getTodaysPlayId();
   }
 };
 
@@ -95,9 +97,8 @@ var getTodaysPlayId = function () {
  * @function onEnded - is an event handler the is fired when each track has ended
  */
 var onEnded = function (event) {
-  console.log('on ended');
-  playById(getNextPlayId());
   playlistIndex += 1;
+  playById(getNextPlayId());
 };
 
 /**
@@ -134,7 +135,8 @@ var onPlayerReady = function (event) {
  * @function onError - is an event handler that is fired when there is an exception
  */
 var onError = function (event) {
-  playDefaultQueId(event);
+  playlistIndex += 1;
+  playById(getNextPlayId());
 };
 
 /**
@@ -245,11 +247,42 @@ function deleteById (id) {
 
 
 $(document).ready(function () {
+  //-- set default volume
+  var rain = document.getElementById("rain-control");
+  rain.volume = 0.2;
 
-  /**
-* event handle for the choose a track modal view
-*/
   $('#YTVID').keydown(function (event) {
+    if (event.which === 13) {
+      event.preventDefault();
+      playInputId();
+    }
+  });
+
+  $('body').keydown(function (event) {
+    console.log(event.which);
+    switch (event.which) {
+      // Escape key for closing the modal
+      case 27:
+        window.location.assign('/#');
+        break;
+      // letter 'c' changer track
+      case 67:
+        window.location.assign('/#playlist');
+        break;
+      // letter 'r' for rain
+      case 82:
+        rain.volume = 0.0;
+      // Arrow keys
+      case 37:
+      case 38:
+        // play prev
+        break;
+      case 39:
+      case 40:
+        // play next
+        break;
+    }
+
     if (event.which === 13) {
       event.preventDefault();
       playInputId();
@@ -259,7 +292,6 @@ $(document).ready(function () {
   $('#PLAY').click(function () {
     playInputId();
   });
-
 });
 
 function renderPlaylist (playlist) {
@@ -308,6 +340,4 @@ $.get('/api/playlist', function (playlist) {
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 })
-//-- set default volume
-var rain = document.getElementById("rain-control");
-rain.volume = 0.2;
+

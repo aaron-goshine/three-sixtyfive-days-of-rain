@@ -10,7 +10,9 @@ request('http://rain365.herokuapp.com/api/playlist', function (error, response, 
     var data = JSON.parse(body);
   jsonfile.writeFile(file, data.map((item) => {
     return item.id;
-  }));
+  }), function () {
+    console.log(data.length);
+  });
   }
 
 })
