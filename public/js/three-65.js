@@ -73,7 +73,10 @@ var calculateDayIndex = function () {
 var getNextPlayId = function () {
   if (playlistIndex >= quickStore.getMaxIndex() || playlistIndex < 0) {
     playlistIndex = 0;
+  } else {
+    playlistIndex += 1;
   }
+
   var item = quickStore.getItemByIndex(playlistIndex);
   if (item) {
     return item.id
@@ -97,7 +100,6 @@ var getTodaysPlayId = function () {
  * @function onEnded - is an event handler the is fired when each track has ended
  */
 var onEnded = function (event) {
-  playlistIndex += 1;
   playById(getNextPlayId());
 };
 
@@ -135,6 +137,7 @@ var onPlayerReady = function (event) {
  * @function onError - is an event handler that is fired when there is an exception
  */
 var onError = function (event) {
+  debugger;
   playlistIndex += 1;
   playById(getNextPlayId());
 };
@@ -161,13 +164,13 @@ var onPlayerStateChange = function (event) {
   switch (event.data) {
     case YT.PlayerState.ENDED:
       onEnded(event);
-    break;
-  case YT.PlayerState.PLAYING:
-    onPlaying(event);
-  break;
-case YT.PlayerState.PAUSED:
-  onPaused(event);
-break;
+      break;
+    case YT.PlayerState.PLAYING:
+      onPlaying(event);
+      break;
+    case YT.PlayerState.PAUSED:
+      onPaused(event);
+      break;
   }
 };
 
@@ -272,15 +275,19 @@ $(document).ready(function () {
       // letter 'r' for rain
       case 82:
         rain.volume = 0.0;
+      break;
       // Arrow keys
-      case 37:
-      case 38:
-        // play prev
-        break;
-      case 39:
-      case 40:
-        // play next
-        break;
+    case 37:
+    case 38:
+      playlistIndex -= 2;
+      playById(getNextPlayId());
+      // play prev
+      break;
+    case 39:
+    case 40:
+      playById(getNextPlayId());
+    // play next
+    break;
     }
 
     if (event.which === 13) {
@@ -329,8 +336,8 @@ function renderPlaylist (playlist) {
 }
 
 $.get('/api/playlist', function (playlist) {
-  renderPlaylist (playlist);
-    /**
+    renderPlaylist(playlist);
+  /**
   * Create script tag to source youtube iframe player
   */
 
