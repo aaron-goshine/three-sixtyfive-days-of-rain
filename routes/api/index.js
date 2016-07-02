@@ -1,13 +1,12 @@
 // routes/api/index.js
-//const key = 'AIzaSyC2ERXDAQzuYjvPEKqP_DLdsByofdJ3DRg';
-
+// const key = 'AIzaSyC2ERXDAQzuYjvPEKqP_DLdsByofdJ3DRg';
 'use strict';
 
 const express = require('express');
 const pg = require('pg');
 const router = express.Router();
-const jsonfile = require('jsonfile')
-const file = 'data/playlist.json'
+const jsonfile = require('jsonfile');
+const file = 'data/playlist.json';
 const YouTube = require('youtube-node');
 const youTube = new YouTube();
 
@@ -18,7 +17,7 @@ function youtubeIdExtrator (idUrl) {
   if (idUrl.length === 11) return idUrl;
   var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
   var match = idUrl.match(regExp);
-  if (match && match[7].length === 11){
+  if (match && match[7].length === 11) {
     return match[7];
   }
   return false;
@@ -35,9 +34,9 @@ function fetchAndStore (youtubeId, callback) {
     var item = result.items.pop();
 
     // Get a Postgres client from the connection pool
-    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
+    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function (err, client, done) {
       // Handle connection errors
-      if(err) {
+      if (err) {
         done();
         console.log(err);
       }
@@ -46,10 +45,10 @@ function fetchAndStore (youtubeId, callback) {
         'id': youtubeId,
         'title': item.snippet.title,
         'thumbnail': item.snippet.thumbnails.default
-      }
+      };
 
-      var query = client.query("INSERT INTO media_tracks (track_data, track_id) values($1, $2)", [jsonObject, jsonObject.id]);
-      query.on('error', function(err) {
+      var query = client.query('INSERT INTO media_tracks (track_data, track_id) values($1, $2)', [jsonObject, jsonObject.id]);
+      query.on('error', function (err) {
         console.log('Query error: ' + err);
       });
       done();
@@ -59,26 +58,26 @@ function fetchAndStore (youtubeId, callback) {
 }
 
 function getAll (req, res, next) {
-  pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
+  pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function (err, client, done) {
     // Handle connection errors
-    if(err) {
+    if (err) {
       done();
       console.log(err);
     }
 
-    var query = client.query("SELECT track_data FROM media_tracks LIMIT 366");
-      query.on('error', function(err) {
-        console.log('Query error: ' + err);
-      });
+    var query = client.query('SELECT track_data FROM media_tracks LIMIT 366');
+    query.on('error', function (err) {
+      console.log('Query error: ' + err);
+    });
 
     var results = [];
     // Stream results back one row at a time
-    query.on('row', function(row) {
+    query.on('row', function (row) {
       results.push(row);
     });
 
     // After all data is returned, close connection and return results
-    query.on('end', function() {
+    query.on('end', function () {
       done();
       return res.json(results.map(function (item) {
         return item.track_data;
@@ -102,15 +101,15 @@ module.exports = () => {
 
   router.post('/delete', (req, res, next) => {
     let youtubeId = req.body.id;
-    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function(err, client, done) {
+    pg.connect(process.env.HEROKU_POSTGRESQL_PINK_URL, function (err, client, done) {
       // Handle connection errors
-      if(err) {
+      if (err) {
         done();
         console.log(err);
       }
 
-      var query = client.query("DELETE FROM media_tracks WHERE track_id = $1", [youtubeId]);
-      query.on('error', function(err) {
+      var query = client.query('DELETE FROM media_tracks WHERE track_id = $1', [youtubeId]);
+      query.on('error', function (err) {
         console.log('Query error: ' + err);
       });
 
@@ -118,6 +117,5 @@ module.exports = () => {
       done();
     });
   });
-
   return router;
 };

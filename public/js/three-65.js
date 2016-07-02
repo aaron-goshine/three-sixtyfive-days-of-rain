@@ -1,4 +1,4 @@
-/* eslint YT $ playlistRecommendation */
+/* global YT, $*/
 
 /*
  * @var {boolean} PLAY_TODAY - whither to just repeat today's track automatically
@@ -79,7 +79,7 @@ var getNextPlayId = function () {
 
   var item = quickStore.getItemByIndex(playlistIndex);
   if (item) {
-    return item.id
+    return item.id;
   } else {
     return getTodaysPlayId();
   }
@@ -92,7 +92,7 @@ var getNextPlayId = function () {
 var getTodaysPlayId = function () {
   var item = quickStore.getItemByIndex(calculateDayIndex());
   if (item) {
-    return item.id
+    return item.id;
   }
 };
 
@@ -137,7 +137,6 @@ var onPlayerReady = function (event) {
  * @function onError - is an event handler that is fired when there is an exception
  */
 var onError = function (event) {
-  debugger;
   playlistIndex += 1;
   playById(getNextPlayId());
 };
@@ -170,7 +169,6 @@ var onPlayerStateChange = function (event) {
       break;
     case YT.PlayerState.PAUSED:
       onPaused(event);
-      break;
   }
 };
 
@@ -219,11 +217,11 @@ function playInputId () {
   $.ajax({
     type: 'POST',
     url: '/api/add',
-    data: JSON.stringify({"mediaurl": videoIdOrUrl}),
+    data: JSON.stringify({'mediaurl': videoIdOrUrl}),
     success: function (playlist) {
-      renderPlaylist (playlist);
+      renderPlaylist(playlist);
     },
-    contentType: "application/json",
+    contentType: 'application/json',
     dataType: 'json'
   });
 }
@@ -239,19 +237,18 @@ function deleteById (id) {
   $.ajax({
     type: 'POST',
     url: '/api/delete',
-    data: JSON.stringify({"id": id}),
+    data: JSON.stringify({'id': id}),
     success: function (playlist) {
       renderPlaylist(playlist);
     },
-    contentType: "application/json",
+    contentType: 'application/json',
     dataType: 'json'
   });
 }
 
-
 $(document).ready(function () {
-  //-- set default volume
-  var rain = document.getElementById("rain-control");
+  // -- set default volume
+  var rain = document.getElementById('rain-control');
   rain.volume = 0.2;
 
   $('#YTVID').keydown(function (event) {
@@ -268,26 +265,24 @@ $(document).ready(function () {
       case 27:
         window.location.assign('/#');
         break;
-      // letter 'c' changer track
+        // letter 'c' changer track
       case 67:
         window.location.assign('/#playlist');
         break;
-      // letter 'r' for rain
+        // letter 'r' for rain
       case 82:
         rain.volume = 0.0;
-      break;
-      // Arrow keys
-    case 37:
-    case 38:
-      playlistIndex -= 2;
-      playById(getNextPlayId());
+// Arrow keys
+        break;
+      case 37:
+      case 38:
+        playlistIndex -= 2;
+        playById(getNextPlayId());
       // play prev
-      break;
-    case 39:
-    case 40:
-      playById(getNextPlayId());
-    // play next
-    break;
+        break;
+      case 39:
+      case 40:
+        playById(getNextPlayId());
     }
 
     if (event.which === 13) {
@@ -313,7 +308,7 @@ function renderPlaylist (playlist) {
     element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
     element.append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'));
     element.append($('<p>' + itemAtIndex.title + '</a>'));
-    element.append($('<div class="delete closebtn" data-id="'+ itemAtIndex.id +'"> &#215;</a>'));
+    element.append($('<div class="delete closebtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
 
     if (todayIndex === i) {
       element.addClass('today');
@@ -323,21 +318,22 @@ function renderPlaylist (playlist) {
   }
 
   $availableList.click(function (event) {
+    var videoId;
     if ($(event.target).prop('tagName') === 'A') {
-      var videoId = $(event.target).attr('id');
+      videoId = $(event.target).attr('id');
       playById(videoId);
     }
 
     if ($(event.target).hasClass('delete')) {
-      var videoId = $(event.target).data('id');
+      videoId = $(event.target).data('id');
       deleteById(videoId);
     }
-  })
+  });
 }
 
 $.get('/api/playlist', function (playlist) {
-    renderPlaylist(playlist);
-  /**
+  renderPlaylist(playlist);
+    /**
   * Create script tag to source youtube iframe player
   */
 
@@ -345,6 +341,4 @@ $.get('/api/playlist', function (playlist) {
   tag.src = 'https://www.youtube.com/iframe_api';
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-})
-
+});
