@@ -269,10 +269,10 @@ $(document).ready(function () {
       case 67:
         window.location.assign('/#playlist');
         break;
-        // letter 'r' for rain
+      // letter 'r' for rain
       case 82:
         rain.volume = 0.0;
-// Arrow keys
+      // Arrow keys
         break;
       case 37:
       case 38:
@@ -306,7 +306,7 @@ function renderPlaylist (playlist) {
     var itemAtIndex = quickStore.getItemByIndex(i);
     var element = $('<div class="list-item"/>');
     element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
-    element.append($('<a id="' + itemAtIndex.id + '">' + (i + 1) + '</a>'));
+    element.append($('<a id="' + itemAtIndex.id + '">&#9658; ' + (i + 1) + '</a>'));
     element.append($('<p>' + itemAtIndex.title + '</a>'));
     element.append($('<div class="delete closebtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
 
