@@ -269,19 +269,20 @@ $(document).ready(function () {
       case 67:
         window.location.assign('/#playlist');
         break;
-      // letter 'r' for rain
+        // letter 'r' for rain
       case 82:
         rain.volume = 0.0;
-      // Arrow keys
         break;
       case 37:
       case 38:
+        // Arrow keys left and up
         playlistIndex -= 2;
         playById(getNextPlayId());
-      // play prev
+        // play prev
         break;
       case 39:
       case 40:
+        // Arrow keys right and down
         playById(getNextPlayId());
     }
 
