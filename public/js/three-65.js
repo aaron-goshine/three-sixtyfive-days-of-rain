@@ -20,6 +20,7 @@ var player;
  */
 var playlistIndex = 0;
 
+var rainVolume = 0.2;
 /**
  * @var quickStore - is an interface to the current playlist
  */
@@ -137,7 +138,6 @@ var onPlayerReady = function (event) {
  * @function onError - is an event handler that is fired when there is an exception
  */
 var onError = function (event) {
-  playlistIndex += 1;
   playById(getNextPlayId());
 };
 
@@ -249,7 +249,7 @@ function deleteById (id) {
 $(document).ready(function () {
   // -- set default volume
   var rain = document.getElementById('rain-control');
-  rain.volume = 0.2;
+  rain.volume = rainVolume;
 
   $('#YTVID').keydown(function (event) {
     if (event.which === 13) {
@@ -271,7 +271,8 @@ $(document).ready(function () {
         break;
         // letter 'r' for rain
       case 82:
-        rain.volume = 0.0;
+        rainVolume = (rainVolume > 0 ? 0 : 0.2);
+        rain.volume = rainVolume;
         break;
       case 37:
       case 38:
