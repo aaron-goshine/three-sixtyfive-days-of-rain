@@ -11,7 +11,8 @@ const YouTube = require('youtube-node');
 const youTube = new YouTube();
 
 pg.defaults.ssl = true;
-youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
+// youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU');
+youTube.setKey('AIzaSyC2ERXDAQzuYjvPEKqP_DLdsByofdJ3DRg');
 
 function youtubeIdExtrator (idUrl) {
   if (idUrl.length === 11) return idUrl;
@@ -28,6 +29,7 @@ function fetchAndStore (youtubeId, callback) {
 
   youTube.getById(youtubeId, (error, result) => {
     if (error) {
+      console.log(error);
       console.log('error while talking to youtube');
       return;
     }
