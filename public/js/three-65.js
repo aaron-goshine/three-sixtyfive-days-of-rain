@@ -252,6 +252,7 @@ function deleteById (id) {
 
 $(document).ready(function () {
   // -- set default volume
+
   var rain = document.getElementById('rain-control');
   rain.volume = rainVolume;
 
