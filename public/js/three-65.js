@@ -257,7 +257,7 @@ $(document).ready(function () {
   rain.volume = rainVolume;
 
   $('#repeat').change(function (event) {
-    repeat = ($(event.target).val() === 'on');
+    repeat = !repeat;
   });
 
   $('#YTVID').keydown(function (event) {
