@@ -21,6 +21,8 @@ var player;
 var playlistIndex = 0;
 
 var rainVolume = 0.2;
+
+var repeat = false;
 /**
  * @var quickStore - is an interface to the current playlist
  */
@@ -75,7 +77,9 @@ var getNextPlayId = function () {
   if (playlistIndex >= quickStore.getMaxIndex() || playlistIndex < 0) {
     playlistIndex = 0;
   } else {
-    playlistIndex += 1;
+    if (!repeat) {
+      playlistIndex += 1;
+    }
   }
 
   var item = quickStore.getItemByIndex(playlistIndex);
@@ -248,8 +252,13 @@ function deleteById (id) {
 
 $(document).ready(function () {
   // -- set default volume
+
   var rain = document.getElementById('rain-control');
   rain.volume = rainVolume;
+
+  $('#repeat').change(function (event) {
+    repeat = !repeat;
+  });
 
   $('#YTVID').keydown(function (event) {
     if (event.which === 13) {

@@ -20,71 +20,74 @@
     <div class="fullscreen-bg">
       <video loop="loop" autoplay="true" poster="/media/rain1.jpg" class="video">
         <source src="media/rain1.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="container">
-        <section class="media-container">
-          <header>
-            <h1>
-              Three Hundred and Sixty Five Days of Rain
-            </h1>
-            <p>Rain makes everything better. Relax with the sound of rain.</p>
-            <h2 id="video-name"></h2>
+      </video>
+    </div>
+    <div class="container">
+      <section class="media-container">
+        <header>
+          <h1>
+            Three Hundred and Sixty Five Days of Rain
+          </h1>
+          <p>Rain makes everything better. Relax with the sound of rain.</p>
+          <h2 id="video-name"></h2>
+        </header>
+        <section id="mood-player">
+          <div id="player"></div>
+          <div id="audio-player">
+            <p>Rain control</p>
+            <audio src="/media/storm-0.m4a"  loop="loop" autoplay="true" controls="controls" id="rain-control">
+              <source src="/media/storm-0.m4a" type="audio/m4a" />
+              <source src="/media/storm-0.ogg" type="audio/ogg" />
+            </audio>
+          </div>
+        </section>
+        <footer>
+          <p>
+            <a href="#playlist" class="button">
+              Choose a track
+            </a>
+          </p>
+          <p>
+            Repeat current track: <input id="repeat" type="checkbox">
+          </p>
+          <p>
+            Three Hundred and Sixty Five Days of Rain is great for when you want to concentrate or relax.
+            Here I have preselected a track for each day of the year and you can also copy a youtbe video ID and paste into the input field at the bottom of the modal window after clicking on the 'Choose a track' button above.
+          </p>
+          <p>
+            I know people have different musical taste so if you would like to suggest tracks to be added to the preselected list please contact me or make a pull request on github if you are a gitter.
+            <a href="https://github.com/aaron-goshine/three-sixtyfive-days-of-rain">
+              github.com/aaron-goshine/three-sixtyfive-days-of-rain
+            </a>
+          </p>
+          <p>
+            <a target="_blank" href="https://gitter.im/aaron-goshine/three-sixtyfive-days-of-rain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
+              <img alt="gitter badge" src="https://badges.gitter.im/aaron-goshine/three-sixtyfive-days-of-rain.svg"/>
+            </a>
+          </p>
+        </footer>
+      </section>
+    </div>
+    <div id="playlist" class="modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <header class="modal-container"> 
+            <a href="#/" class="closebtn">×</a>
+            <h4>Choose one of our preselected youtube tracks</h4>
           </header>
-          <section id="mood-player">
-            <div id="player"></div>
-            <div id="audio-player">
-              <p>Rain control</p>
-              <audio  loop="loop" autoplay="true" controls="controls" id="rain-control">
-                <source src="/media/storm-0.ogg" type="audio/ogg" />
-                  <source src="/media/storm-0.m4a" type="audio/m4a" />
-                  </audio>
-                </div>
-              </section>
-              <footer>
-                <p>
-                  <a href="#playlist" class="button">
-                     Choose a track
-                  </a>
-                </p>
-                <p>
-                  Three Hundred and Sixty Five Days of Rain is great for when you want to concentrate or relax.
-                  Here I have preselected a track for each day of the year and you can also copy a youtbe video ID and paste into the input field at the bottom of the modal window after clicking on the 'Choose a track' button above.
-                </p>
-                <p>
-                  I know people have different musical taste so if you would like to suggest tracks to be added to the preselected list please contact me or make a pull request on github if you are a gitter.
-                  <a href="https://github.com/aaron-goshine/three-sixtyfive-days-of-rain">
-                    github.com/aaron-goshine/three-sixtyfive-days-of-rain
-                  </a>
-                </p>
-                <p>
-                  <a target="_blank" href="https://gitter.im/aaron-goshine/three-sixtyfive-days-of-rain?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
-                    <img alt="gitter badge" src="https://badges.gitter.im/aaron-goshine/three-sixtyfive-days-of-rain.svg"/>
-                  </a>
-                </p>
-              </footer>
-            </section>
+          <div class="modal-container" id="available-list">
           </div>
-          <div id="playlist" class="modal">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <header class="modal-container"> 
-                  <a href="#/" class="closebtn">×</a>
-                  <h4>Choose one of our preselected youtube tracks</h4>
-                </header>
-                <div class="modal-container" id="available-list">
-                </div>
-                <footer class="modal-container">
-                  <p>
-                    <span>Enter a Youtube video Url: </span>
-                    <input type="text" id="YTVID" /> 
-                    <a id="PLAY" class="button">Add to playlist</a>
-                  </p>
-                </footer>
-              </div>
-            </div>
-          </div>
-          <script src="/js/jquery.js"></script>
-          <script src="/js/three-65.js"></script>
-        </body>
-      </html>
+          <footer class="modal-container">
+            <p>
+              <span>Enter a Youtube video Url: </span>
+              <input type="text" id="YTVID" /> 
+              <a id="PLAY" class="button">Add to playlist</a>
+            </p>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/three-65.js"></script>
+  </body>
+</html>
