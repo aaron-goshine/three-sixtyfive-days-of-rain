@@ -4,5 +4,6 @@
 
 ### Todo
 
-[x] implement repeat
+- [x] implement repeat
+- [] implement multiplexing, overlaying mulple tracks
 
