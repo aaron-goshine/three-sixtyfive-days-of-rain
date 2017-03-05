@@ -1,4 +1,3 @@
-
 'use strict';
 // const key = 'AIzaSyC2ERXDAQzuYjvPEKqP_DLdsByofdJ3DRg';
 const jsonfile = require('jsonfile');

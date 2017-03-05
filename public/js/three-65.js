@@ -204,6 +204,8 @@ var onYouTubeIframeAPIReady = function () {
 var playById = function (videoId) {
   player.loadVideoById(videoId);
   playlistIndex = quickStore.getIndexById(videoId);
+  var itemAtIndex = quickStore.getItemByIndex(playlistIndex);
+  $('.now-playing').html((playlistIndex + 1) + ' ' + itemAtIndex.title);
   $('.item-outline').removeClass('item-outline');
   $('#' + videoId).parent().addClass('item-outline');
 };
