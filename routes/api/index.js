@@ -67,7 +67,7 @@ function getAll (req, res, next) {
       console.log(err);
     }
 
-    var query = client.query('SELECT track_data FROM media_tracks LIMIT 366');
+    var query = client.query('SELECT track_data FROM media_tracks LIMIT 563');
     query.on('error', function (err) {
       console.log('Query error: ' + err);
     });

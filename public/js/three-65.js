@@ -278,7 +278,11 @@ $(document).ready(function () {
         break;
         // letter 'c' changer track
       case 67:
-        window.location.assign('/#playlist');
+        if (window.location.hash === '#playlist') {
+          window.location.assign('/#');
+        } else {
+          window.location.assign('/#playlist');
+        }
         break;
         // letter 'r' for rain
       case 82:
@@ -287,6 +291,7 @@ $(document).ready(function () {
         break;
       case 37:
       case 38:
+      case 75:
         // Arrow keys left and up
         playlistIndex -= 2;
         playById(getNextPlayId());
@@ -294,6 +299,7 @@ $(document).ready(function () {
         break;
       case 39:
       case 40:
+      case 74:
         // Arrow keys right and down
         playById(getNextPlayId());
     }
