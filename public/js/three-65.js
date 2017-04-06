@@ -220,16 +220,19 @@ function playInputId () {
     playById(videoIdOrUrl);
   }
 
+  var comment = $('#COMM').val().trim();
+
   $.ajax({
     type: 'POST',
     url: '/api/add',
-    data: JSON.stringify({'mediaurl': videoIdOrUrl}),
+    data: JSON.stringify({'mediaurl': videoIdOrUrl, 'comment': comment}),
     success: function (playlist) {
       renderPlaylist(playlist);
     },
     contentType: 'application/json',
     dataType: 'json'
   });
+  $('.isertion-form-container').hide();
 }
 
   /**
@@ -252,9 +255,44 @@ function deleteById (id) {
   });
 }
 
+function renderPlaylist (playlist) {
+  quickStore.updateStore(playlist);
+  var $availableList = $('#available-list');
+  $availableList.empty();
+  var numItems = quickStore.getMaxIndex();
+  var todayIndex = calculateDayIndex();
+  for (var i = 0; i < numItems; i++) {
+    var itemAtIndex = quickStore.getItemByIndex(i);
+    var element = $('<div class="list-item"/>');
+    element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
+    element.append($('<a id="' + itemAtIndex.id + '">&#9658; ' + (i + 1) + '</a>'));
+    element.append($('<p>' + itemAtIndex.title + '</a>'));
+    element.append($('<p>' + (itemAtIndex.comment || '') + '</a>'));
+    element.append($('<div class="delete closebtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
+
+    if (todayIndex === i) {
+      element.addClass('today');
+    }
+
+    $availableList.append(element);
+  }
+
+  $availableList.click(function (event) {
+    var videoId;
+    if ($(event.target).prop('tagName') === 'A') {
+      videoId = $(event.target).attr('id');
+      playById(videoId);
+    }
+
+    if ($(event.target).hasClass('delete')) {
+      videoId = $(event.target).data('id');
+      deleteById(videoId);
+    }
+  });
+}
+
 $(document).ready(function () {
   // -- set default volume
-
   var rain = document.getElementById('rain-control');
   rain.volume = rainVolume;
 
@@ -269,18 +307,34 @@ $(document).ready(function () {
     }
   });
 
+  $('#COMM').keydown(function (event) {
+    var remianing_chars = 140 - $(event.target).val().length;
+    $('#char-count').html(remianing_chars);
+    if (event.which !== 8 && remianing_chars <= 0) {
+      event.preventDefault();
+    }
+  });
+
+  $('.isertion-form-container').hide();
+
+  $('#close-add-panel').click(function (event) {
+    $('.isertion-form-container').hide();
+  });
+
+  $('#add-track').click(function (event) {
+    $('.isertion-form-container').show();
+  });
+
   $('body').keydown(function (event) {
     console.log(event.which);
     switch (event.which) {
-      // Escape key for closing the modal
+        // Escape key for closing the modal
       case 27:
         window.location.assign('/#');
         break;
         // letter 'c' changer track
       case 67:
-        if (window.location.hash === '#playlist') {
-          window.location.assign('/#');
-        } else {
+        if (window.location.hash !== '#playlist') {
           window.location.assign('/#playlist');
         }
         break;
@@ -313,51 +367,16 @@ $(document).ready(function () {
   $('#PLAY').click(function () {
     playInputId();
   });
-});
 
-function renderPlaylist (playlist) {
-  quickStore.updateStore(playlist);
-  var $availableList = $('#available-list');
-  $availableList.empty();
-  var numItems = quickStore.getMaxIndex();
-  var todayIndex = calculateDayIndex();
-  for (var i = 0; i < numItems; i++) {
-    var itemAtIndex = quickStore.getItemByIndex(i);
-    var element = $('<div class="list-item"/>');
-    element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
-    element.append($('<a id="' + itemAtIndex.id + '">&#9658; ' + (i + 1) + '</a>'));
-    element.append($('<p>' + itemAtIndex.title + '</a>'));
-    element.append($('<div class="delete closebtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
-
-    if (todayIndex === i) {
-      element.addClass('today');
-    }
-
-    $availableList.append(element);
-  }
-
-  $availableList.click(function (event) {
-    var videoId;
-    if ($(event.target).prop('tagName') === 'A') {
-      videoId = $(event.target).attr('id');
-      playById(videoId);
-    }
-
-    if ($(event.target).hasClass('delete')) {
-      videoId = $(event.target).data('id');
-      deleteById(videoId);
-    }
-  });
-}
-
-$.get('/api/playlist', function (playlist) {
-  renderPlaylist(playlist);
+  $.get('/api/playlist', function (playlist) {
+    renderPlaylist(playlist);
     /**
-  * Create script tag to source youtube iframe player
-  */
-
-  var tag = document.createElement('script');
-  tag.src = 'https://www.youtube.com/iframe_api';
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+     * Create script tag to source youtube iframe player
+     */
+    var tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  });
 });
+

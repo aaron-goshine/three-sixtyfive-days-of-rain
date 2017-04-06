@@ -24,7 +24,21 @@ function youtubeIdExtrator (idUrl) {
   return false;
 }
 
-function fetchAndStore (youtubeId, callback) {
+function stripTags_sub (input, allowed) {
+  allowed = (((allowed || '') + '').toLowerCase().match(/<[a-z][a-z0-9]*>/g) || []).join('');
+  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+  var commentsAndPhpTags = /<!--[\s\S]*?-->|<\?(?:php)?[\s\S]*?\?>/gi;
+  return input.replace(commentsAndPhpTags, '').replace(tags, function ($0, $1) {
+    return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+  });
+}
+
+function stripTags (str) {
+  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+  return str.replace(tags, ' ');
+}
+
+function fetchAndStore (youtubeId, comment, callback) {
   if (!youtubeId) return;
 
   youTube.getById(youtubeId, (error, result) => {
@@ -46,10 +60,12 @@ function fetchAndStore (youtubeId, callback) {
       var jsonObject = {
         'id': youtubeId,
         'title': item.snippet.title,
-        'thumbnail': item.snippet.thumbnails.default
+        'comment': stripTags(comment).substring(0, 140),
+        'thumbnail': item.snippet.thumbnails.default,
+        'info': item
       };
 
-      var query = client.query('INSERT INTO media_tracks (track_data, track_id) values($1, $2)', [jsonObject, jsonObject.id]);
+      var query = client.query('INSERT INTO media_tracks (track_data, track_id, track_comment) values($1, $2, $3)', [jsonObject, jsonObject.id, jsonObject.comment]);
       query.on('error', function (err) {
         console.log('Query error: ' + err);
       });
@@ -67,7 +83,7 @@ function getAll (req, res, next) {
       console.log(err);
     }
 
-    var query = client.query('SELECT track_data FROM media_tracks LIMIT 563');
+    var query = client.query('SELECT * FROM media_tracks LIMIT 700');
     query.on('error', function (err) {
       console.log('Query error: ' + err);
     });
@@ -95,8 +111,9 @@ module.exports = () => {
 
   router.post('/add', (req, res, next) => {
     var media = req.body.mediaurl;
+    var comment = req.body.comment;
     var youtubeId = youtubeIdExtrator(media);
-    fetchAndStore(youtubeId, function () {
+    fetchAndStore(youtubeId, comment, function () {
       getAll(req, res, next);
     });
   });
