@@ -29,10 +29,10 @@ var repeat = false;
 var quickStore = {
   data: [],
   dataHash: {},
-    /**
-  * @method  updateStore
-  * @param {array} data - Array containing objects @like `{id : ...., name: ......}`
-  */
+  /**
+   * @method  updateStore
+   * @param {array} data - Array containing objects @like `{id : ...., name: ......}`
+   */
   updateStore: function (data) {
     this.data = data;
     for (var i = 0; i < data.length; i++) {
@@ -209,10 +209,10 @@ var playById = function (videoId) {
   $('.item-outline').removeClass('item-outline');
   $('#' + videoId).parent().addClass('item-outline');
 };
-  /**
-* @function playInputId
-* @desc - event handler
-*/
+/**
+ * @function playInputId
+ * @desc - event handler
+ */
 function playInputId () {
   var videoIdOrUrl = $('#YTVID').val().trim();
   // * 11 is the current length of Youtube videoID
@@ -235,13 +235,13 @@ function playInputId () {
   $('.isertion-form-container').hide();
 }
 
-  /**
-* delete by id
-*
-* @name deleteById
-* @function
-* @param {object} event
-*/
+/**
+ * delete by id
+ *
+ * @name deleteById
+ * @function
+ * @param {object} event
+ */
 function deleteById (id) {
   $.ajax({
     type: 'POST',
@@ -267,8 +267,11 @@ function renderPlaylist (playlist) {
     element.append($('<img src="' + itemAtIndex.thumbnail.url + '"/>'));
     element.append($('<a id="' + itemAtIndex.id + '">&#9658; ' + (i + 1) + '</a>'));
     element.append($('<p>' + itemAtIndex.title + '</a>'));
-    element.append($('<p>' + (itemAtIndex.comment || '') + '</a>'));
-    element.append($('<div class="delete closebtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
+    element.append($('<div class="delete tinybtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
+    if (itemAtIndex.comment) {
+      element.append($('<div class="info tinybtn" title=' +
+        (itemAtIndex.comment || '') + ' data-id="' + itemAtIndex.id + '"> &#9829;</a>'));
+    }
 
     if (todayIndex === i) {
       element.addClass('today');
@@ -287,6 +290,11 @@ function renderPlaylist (playlist) {
     if ($(event.target).hasClass('delete')) {
       videoId = $(event.target).data('id');
       deleteById(videoId);
+    }
+
+    if ($(event.target).hasClass('info')) {
+      var title = $(event.target).attr('title');
+      alert(title);
     }
   });
 }

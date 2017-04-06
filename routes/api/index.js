@@ -34,7 +34,7 @@ function stripTags_sub (input, allowed) {
 }
 
 function stripTags (str) {
-  var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi;
+  var tags = /[^a-zA-Z _ - \- \+ \. \! \, \: ]/gi;
   return str.replace(tags, ' ');
 }
 
