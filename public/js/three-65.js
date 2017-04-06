@@ -269,8 +269,7 @@ function renderPlaylist (playlist) {
     element.append($('<p>' + itemAtIndex.title + '</a>'));
     element.append($('<div class="delete tinybtn" data-id="' + itemAtIndex.id + '"> &#215;</a>'));
     if (itemAtIndex.comment) {
-      element.append($('<div class="info tinybtn" title=' +
-        (itemAtIndex.comment || '') + ' data-id="' + itemAtIndex.id + '"> &#9829;</a>'));
+      element.append($('<div class="info tinybtn" data-comment="' + itemAtIndex.comment + '" data-id="' + itemAtIndex.id + '"> &#9829;</a>'));
     }
 
     if (todayIndex === i) {
@@ -293,8 +292,8 @@ function renderPlaylist (playlist) {
     }
 
     if ($(event.target).hasClass('info')) {
-      var title = $(event.target).attr('title');
-      alert(title);
+      var comment = $(event.target).data('comment');
+      alert(comment);
     }
   });
 }
