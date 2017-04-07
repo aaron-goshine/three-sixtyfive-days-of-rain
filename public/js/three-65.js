@@ -294,6 +294,7 @@ function renderPlaylist (playlist) {
     if ($(event.target).hasClass('info')) {
       var comment = $(event.target).data('comment');
       alert(comment);
+      return null;
     }
   });
 }
