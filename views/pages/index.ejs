@@ -41,6 +41,7 @@
               <source src="/media/storm-0.ogg" type="audio/ogg" />
             </audio>
           </div>
+          <p id="coment-container"></p>
         </section>
         <footer>
           <p>
@@ -69,22 +70,33 @@
         </footer>
       </section>
     </div>
+
     <div id="playlist" class="modal">
-      <div class="modal-dialog">
-        <div class="modal-content">
+
+          <section class="isertion-form-container">
+              <button class="tinybtn" id="close-add-panel">×</button>
+            <div>
+              <label for="YTVID">Enter a Youtube video Url:</label>
+              <input type="text" id="YTVID" /> 
+            </div>
+
+            <div>
+              <label for="COMM">Comment (140 chars. max.) </label>
+              <textarea type="text" id="COMM"/></textarea> 
+              <a id="PLAY" class="button">Add to playlist</a>
+            </div>
+            <p class="char-count-wrapper">Remaining chars:
+              <span id="char-count">140</span></p>
+          </section>
+
+          <div class="modal-dialog">
+            <div class="modal-content">
           <header class="modal-container"> 
-            <a href="#/" class="closebtn">×</a>
-            <h4>Choose one of our preselected YouTube tracks</h4>
+            <button class="button" id="add-track">add</button>
+            <a href="#/" class="tinybtn">×</a>
           </header>
           <div class="modal-container" id="available-list">
           </div>
-          <footer class="modal-container">
-            <p>
-              <span>Enter a Youtube video Url: </span>
-              <input type="text" id="YTVID" /> 
-              <a id="PLAY" class="button">Add to playlist</a>
-            </p>
-          </footer>
         </div>
       </div>
     </div>
