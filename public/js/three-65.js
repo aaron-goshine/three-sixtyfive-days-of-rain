@@ -144,6 +144,7 @@ var onPlayerReady = function (event) {
 var onError = function (event) {
   var itemAtIndex = quickStore.getItemByIndex(playlistIndex)
   deleteById(itemAtIndex.id)
+  playById(getNextPlayId())
 }
 
 /**
