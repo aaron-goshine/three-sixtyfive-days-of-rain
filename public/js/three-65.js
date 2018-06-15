@@ -1,13 +1,9 @@
 /* global YT, $ alert */
 
-/*
- * @var {boolean} PLAY_TODAY - whither to just repeat today's track automatically
- */
-var PLAY_TODAY = true
-
 /**
  * @var {string} DEFAULT_PLAY_ID - default id if everything goes wrong the player will resort
  */
+
 var DEFAULT_PLAY_ID = 'Ua2loiGHZ38'
 
 /**
@@ -124,13 +120,6 @@ var onPaused = function (event) {
 }
 
 /**
- * @function stopVideo - is a wrapper to the current player.stopVideo()
- */
-var stopVideo = function () {
-  player.stopVideo()
-}
-
-/**
  * @function onPlayerReady - is an event handler that is fired when the
  * player is fully loading and ready to play
  */
@@ -226,7 +215,7 @@ function playInputId () {
 
   $.ajax({
     type: 'POST',
-    url: '/api/add',
+    url: '/api/item',
     data: JSON.stringify({'mediaurl': videoIdOrUrl, 'comment': comment}),
     success: function (playlist) {
       renderPlaylist(playlist)
@@ -246,8 +235,8 @@ function playInputId () {
  */
 function deleteById (id) {
   $.ajax({
-    type: 'POST',
-    url: '/api/delete',
+    type: 'DELETE',
+    url: '/api/item',
     data: JSON.stringify({'id': id}),
     success: function (playlist) {
       renderPlaylist(playlist)

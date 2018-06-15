@@ -5,17 +5,14 @@ const path = require('path')
 const bodyParser = require('body-parser')
 
 app.set('port', (process.env.PORT || 5000))
-
-app.use(express.static(path.resolve(__dirname, '/public')))
-
+app.use(express.static(path.resolve('./public/')))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
 app.use('/api', api())
 
-// views is directory for all template files
-app.set('views', path.resolve(__dirname, '/views'))
+app.set('views', path.resolve('./views/'))
 app.set('view engine', 'ejs')
-
 app.get('/', function (request, response) {
   response.render('pages/index')
 })

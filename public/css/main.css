@@ -8,8 +8,12 @@ html {
   line-height: 1.4;
 }
 
-audio, canvas,img, svg, video {
-  vertical-align:middle;
+audio,
+canvas,
+img,
+svg,
+video {
+  vertical-align: middle;
 }
 
 a {
@@ -20,7 +24,7 @@ body {
   font-size: 16px;
   font-family: 'Marcellus', serif;
   color: #fff;
-  background: #000000;
+  background: #000;
   box-sizing: border-box;
 }
 
@@ -36,20 +40,16 @@ h6 {
   margin: 0;
 }
 
-h1 {
-  font-size: 50px;
-  line-height: 50px;
-  margin: 0 0 1em 0;
-}
+h1 { margin: 0 0 1em; }
 
 h2 {
   font-size: 18px;
   line-height: 18px;
-  margin: 0 0 1em 0;
+  margin: 0 0 1em;
 }
 
 /*************************************
- * general classes 
+ * general classes
  **************************************/
 
 .button {
@@ -70,13 +70,14 @@ h2 {
   background-color: #06f9f8;
 }
 
-.clearfix: before, .clearfix:after {
-  content:" ";
-  display:table;
+.clearfix::before,
+.clearfix::after {
+  content: " ";
+  display: table;
 }
 
-.clearfix:after{
-  clear:both;
+.clearfix::after {
+  clear: both;
 }
 
 .fullscreen-bg {
@@ -85,14 +86,14 @@ h2 {
   padding-bottom: 75%;
 }
 
-.fullscreen-bg  .video {
+.fullscreen-bg .video {
   position: absolute;
   width: 100%;
   top: 0;
   left: 0;
-  -webkit-box-shadow: inset 0px -71px 81px 12px rgba(0,0,0,0.9);
-  -moz-box-shadow: inset 0px -71px 81px 12px rgba(0,0,0,0.9);
-  box-shadow: inset 0px -71px 81px 12px rgba(0,0,0,0.9);
+  -webkit-box-shadow: inset 0 -71px 81px 12px rgba(0, 0, 0, 0.9);
+  -moz-box-shadow: inset 0 -71px 81px 12px rgba(0, 0, 0, 0.9);
+  box-shadow: inset 0 -71px 81px 12px rgba(0, 0, 0, 0.9);
 }
 
 .container {
@@ -101,13 +102,15 @@ h2 {
   width: 360px;
   margin: 0 auto;
   padding: 50px 20px;
-  background: rgba(0,0,0,0.365);
+  background: rgba(0, 0, 0, 0.365);
 }
 
-audio:hover, audio:focus, audio:active {
-  -webkit-box-shadow: 0px 0px 20px rgba(0,0, 0, 0.4);
-  -moz-box-shadow: 0px 0px 20px rgba(0,0, 0, 0.4);
-  box-shadow: 0px 0px 20px rgba(0,0, 0, 0.4);
+audio:hover,
+audio:focus,
+audio:active {
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 20 rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 20 rgba(0, 0, 0, 0.4);
   -webkit-transform: scale(1.05);
   -moz-transform: scale(1.05);
   transform: scale(1.05);
@@ -115,23 +118,22 @@ audio:hover, audio:focus, audio:active {
 
 audio {
   width: 100%;
-  -webkit-transition:all 0.5s linear;
-  -moz-transition:all 0.5s linear;
-  -o-transition:all 0.5s linear;
-  transition:all 0.5s linear;
-  -moz-box-shadow: 0px 0px 4px 0px #006773;
-  -webkit-box-shadow:  0px 0px 4px 0px #006773;
-  box-shadow: 0px 0px 4px 0px #006773;
-  -moz-border-radius:7px 7px 7px 7px ;
-  -webkit-border-radius:7px 7px 7px 7px ;
-  border-radius:7px 7px 7px 7px ;
+  -webkit-transition: all 0.5s linear;
+  -moz-transition: all 0.5s linear;
+  -o-transition: all 0.5s linear;
+  transition: all 0.5s linear;
+  -moz-box-shadow: 0 0 4px 0 #006773;
+  -webkit-box-shadow: 0 0 4px 0 #006773;
+  box-shadow: 0 0 4px 0 #006773;
+  -moz-border-radius: 7px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
 }
 
 #audio-player {
   width: 320px;
   margin: 0 auto;
   display: block;
-  margin: 0 auto;
 }
 
 /* Add animation (Chrome, Safari, Opera) */
@@ -175,8 +177,9 @@ audio {
 }
 
 .modal h3 {
-  max-width: 365px
+  max-width: 365px;
 }
+
 /* Display the modal when targeted */
 .modal:target {
   display: table;
@@ -192,15 +195,15 @@ audio {
 
 .modal-dialog .modal-content {
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.730); 
+  background-color: rgba(0, 0, 0, 0.73);
   position: relative;
   padding: 0;
   outline: 0;
   border: 1px #000 solid;
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -webkit-animation-name: visibility; /* Chrome, Safari, Opera */
-  -webkit-animation-duration: 0.5s; /* Chrome, Safari, Opera */
+  -webkit-animation-name: visibility;
+  -webkit-animation-duration: 0.5s;
   animation-name: visibility;
   animation-duration: 0.5s;
 }
@@ -218,7 +221,7 @@ audio {
 }
 #available-list div {
   font-size: 0.8em;
-  background-color: rgba(65, 65, 65, 0.50); 
+  background-color: rgba(65, 65, 65, 0.5);
   display: inline-block;
   padding: 5px;
   width: 120px;
@@ -226,7 +229,7 @@ audio {
   text-align: center;
 }
 
-#available-list div a{
+#available-list div a {
   display: block;
   clear: both;
   background-color: #04b8a6;
@@ -262,7 +265,8 @@ audio {
   cursor: pointer;
 }
 
-header *, footer * {
+header *,
+footer * {
   text-align: center;
 }
 
@@ -277,7 +281,9 @@ header *, footer * {
 .modal footer {
   color: white;
 }
-textarea, input, .modal input {
+textarea,
+input,
+.modal input {
   color: #000;
   margin-bottom: 1em;
 }
@@ -291,7 +297,6 @@ textarea, input, .modal input {
   padding: 0.2em 0;
   z-index: 100;
 }
-
 
 .isertion-form-container {
   position: absolute;
@@ -312,10 +317,7 @@ textarea, input, .modal input {
   font-family: arial;
 }
 
-
 #COMM {
   min-width: 240px;
   font-family: arial;
 }
-
-#coment-container{}
