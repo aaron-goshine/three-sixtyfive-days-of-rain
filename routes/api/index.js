@@ -46,7 +46,6 @@ function getPlaylist (req, res, next) {
     res.json(results.rows.map((item) => {
       return item.track_data
     }))
-    client.end()
   })
 }
 
