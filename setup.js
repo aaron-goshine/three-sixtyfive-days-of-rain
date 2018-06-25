@@ -3,7 +3,6 @@
 const jsonfile = require('jsonfile')
 const YouTube = require('youtube-node')
 
-const file = './data/playlist.json'
 const youTube = new YouTube()
 youTube.setKey('AIzaSyB1OOSpTREs85WUMvIgJvLTZKye4BVsoFU')
 
