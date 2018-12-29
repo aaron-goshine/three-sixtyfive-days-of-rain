@@ -24,6 +24,23 @@
       </video>
     </div>
     <div class="container">
+
+      <section class="isertion-form-container" id="isertion-form-container">
+        <button class="tinybtn" id="close-add-panel">×</button>
+        <div>
+          <label for="YTVID">Enter a Youtube video Url:</label>
+          <input type="text" id="YTVID" /> 
+        </div>
+
+        <div>
+          <label for="COMM">Comment (140 chars. max.) </label>
+          <textarea type="text" id="COMM"/></textarea> 
+          <a id="PLAY" class="button">Add to playlist</a>
+        </div>
+        <p class="char-count-wrapper">Remaining chars:
+          <span id="char-count">140</span></p>
+      </section>
+
       <section class="media-container">
         <header>
           <h1>
@@ -71,30 +88,13 @@
       </section>
     </div>
 
-    <div id="playlist" class="modal">
-
-          <section class="isertion-form-container">
-              <button class="tinybtn" id="close-add-panel">×</button>
-            <div>
-              <label for="YTVID">Enter a Youtube video Url:</label>
-              <input type="text" id="YTVID" /> 
-            </div>
-
-            <div>
-              <label for="COMM">Comment (140 chars. max.) </label>
-              <textarea type="text" id="COMM"/></textarea> 
-              <a id="PLAY" class="button">Add to playlist</a>
-            </div>
-            <p class="char-count-wrapper">Remaining chars:
-              <span id="char-count">140</span></p>
-          </section>
-
+    <div id="playlist" class="modal"> 
           <div class="modal-dialog">
             <div class="modal-content">
               <header class="modal-container"> 
                 <nav>
                   <button class="button" id="add-track">add</button>
-                  <a href="#/" class="cancel-button">×</a>
+                  <a href="#/" class="tinybtn">×</a>
                 </nav>
               </header>
               <div class="modal-container" id="available-list">

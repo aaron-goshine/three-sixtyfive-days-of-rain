@@ -317,13 +317,12 @@ input,
 }
 
 .isertion-form-container {
-  position: absolute;
   width: 240px;
   z-index: 10;
   background-color: gray;
   padding: 2em;
   top: 2.8em;
-  left: 2.5em;
+  position: fixed;
 }
 
 .isertion-form-container label {

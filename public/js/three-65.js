@@ -287,14 +287,17 @@ $(document).ready(function () {
       event.preventDefault();
     }
   });
-
   $('.isertion-form-container').hide();
 
-  $('#close-add-panel').click(function (event) {
+  $('.cancel-button').click(function () {
     $('.isertion-form-container').hide();
   });
 
-  $('#add-track').click(function (event) {
+  $('#close-add-panel').click(function () {
+    $('.isertion-form-container').hide();
+  });
+
+  $('#add-track').click(function () {
     $('.isertion-form-container').show();
   });
 
@@ -304,6 +307,7 @@ $(document).ready(function () {
       // Escape key for closing the modal
       case 27:
         window.location.assign('/#');
+        $('.isertion-form-container').hide();
         break;
         // letter 'c' changer track
       case 67:
